@@ -5,11 +5,11 @@ public interface Car {
 	
 ////TODO add params and stuff
 	
-	public void MoveForward();
+	public VehicleState MoveForward();
 
 	public void isEmpty();
 
-	public void MoveBackward();
+	public VehicleState MoveBackward();
 
 	public void Park();
 

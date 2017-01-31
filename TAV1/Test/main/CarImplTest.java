@@ -1,4 +1,5 @@
-/*
+package main;
+        /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -42,10 +43,13 @@ public class CarImplTest {
     @Test
     public void testMoveForward() {
         System.out.println("MoveForward");
+        //  Pre-condition: The car is not on the end of the street and the car is not parked.
         CarImpl instance = new CarImpl();
-        instance.MoveForward();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //Test-cases: testMoveForward();
+        VehicleState vehicleState = new VehicleState();
+        vehicleState = instance.MoveForward();
+        // Post-condition: The car is moved 1m forward.
+         assertEquals(1, vehicleState.getPosition());
     }
 
     /**
@@ -65,11 +69,14 @@ public class CarImplTest {
      */
     @Test
     public void testMoveBackward() {
-        System.out.println("MoveBackward");
+       //Pre-condition: The car is not at the beginning of the street.
         CarImpl instance = new CarImpl();
-        instance.MoveBackward();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.MoveForward();
+        //Test-cases: testMoveBackward();
+         VehicleState vehicleState = new VehicleState(); //save result in this
+         vehicleState = instance.MoveBackward();
+         //Post-condition: The car is moved 1m backward.
+         assertEquals(0, vehicleState.getPosition());
     }
 
     /**

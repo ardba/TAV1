@@ -3,10 +3,16 @@ package main;
 public class CarImpl implements Car {
 	
 	boolean isParked;
-	
+	VehicleState vehicleState;
+
+    public CarImpl() { //initialize vehicleState
+        vehicleState = new VehicleState();
+    }
+        
 	@Override
-	public void MoveForward() {
-		
+	public VehicleState MoveForward() {
+           vehicleState.setPosition(vehicleState.getPosition() +1);
+           return vehicleState;	
 	}
 
 	@Override
@@ -15,7 +21,9 @@ public class CarImpl implements Car {
 	}
 
 	@Override
-	public void MoveBackward() {
+	public VehicleState MoveBackward() {
+             vehicleState.setPosition(vehicleState.getPosition() -1);
+            return vehicleState;
 		
 	}
 
