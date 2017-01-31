@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author sanja
  */
-public class moveForwardTest {
+public class CarImplTest {
     
-    public moveForwardTest() {
+    public CarImplTest() {
     }
     
     @BeforeClass
