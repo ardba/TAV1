@@ -37,7 +37,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of MoveForward method, of class CarImpl.
+     * Test of MoveForward method, of class main.CarImpl.
      */
     @Test
     public void testMoveForward() {
@@ -49,7 +49,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of isEmpty method, of class CarImpl.
+     * Test of isEmpty method, of class main.CarImpl.
      */
     @Test
     public void testIsEmpty() {
@@ -61,7 +61,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of MoveBackward method, of class CarImpl.
+     * Test of MoveBackward method, of class main.CarImpl.
      */
     @Test
     public void testMoveBackward() {
@@ -73,7 +73,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of Park method, of class CarImpl.
+     * Test of Park method, of class main.CarImpl.
      */
     @Test
     public void testPark() {
@@ -85,7 +85,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of UnPark method, of class CarImpl.
+     * Test of UnPark method, of class main.CarImpl.
      */
     @Test
     public void testUnPark() {
@@ -97,7 +97,7 @@ public class CarImplTest {
     }
 
     /**
-     * Test of WhereIs method, of class CarImpl.
+     * Test of WhereIs method, of class main.CarImpl.
      */
     @Test
     public void testWhereIs() {

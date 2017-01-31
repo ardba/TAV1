@@ -1,3 +1,4 @@
+package main;
 
 public class Sensor {
 	private int[] distance = new int[2500];
