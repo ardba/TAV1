@@ -1,9 +1,11 @@
 package main;
 
+
+
 public class Main {
 
 	public static void main(String[] args) {
-		Sensor sensor = new Sensor();
+		System.out.println("Why doesn't it run?");
 	}
 
 }
