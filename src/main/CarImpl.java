@@ -11,9 +11,11 @@ public class CarImpl implements Car {
         
 	@Override
 	public VehicleState MoveForward() {
-           vehicleState.setPosition(vehicleState.getPosition() +1);
-           return vehicleState;	
+            if(vehicleState.getPosition() != 500){
+           vehicleState.setPosition(vehicleState.getPosition() +1);  
 	}
+            return vehicleState;	
+        }
 
 	@Override
 	public void isEmpty() {
@@ -22,10 +24,12 @@ public class CarImpl implements Car {
 
 	@Override
 	public VehicleState MoveBackward() {
-             vehicleState.setPosition(vehicleState.getPosition() -1);
+            if (vehicleState.getPosition() !=0 ){
+                vehicleState.setPosition(vehicleState.getPosition() -1);
+            }  
             return vehicleState;
-		
 	}
+
 
 	@Override
 	public void Park() {
