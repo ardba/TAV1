@@ -1,20 +1,19 @@
 package main;
 
 public class CarImpl implements Car {
-	
-	boolean isParked;
-	VehicleState vehicleState;
 
-    public CarImpl() { //initialize vehicleState
-        vehicleState = new VehicleState();
+	VehicleData vehicleData;
+
+    public CarImpl() { //initialize vehicleData
+        vehicleData = new VehicleData();
     }
         
 	@Override
-	public VehicleState MoveForward() {
-            if(vehicleState.getPosition() != 500){
-           vehicleState.setPosition(vehicleState.getPosition() +1);  
+	public VehicleData moveForward() {
+            if(vehicleData.getPosition() != 500){
+                vehicleData.setPosition(vehicleData.getPosition() +1);
 	}
-            return vehicleState;	
+            return vehicleData;
         }
 
 	@Override
@@ -23,26 +22,33 @@ public class CarImpl implements Car {
 	}
 
 	@Override
-	public VehicleState MoveBackward() {
-            if (vehicleState.getPosition() !=0 ){
-                vehicleState.setPosition(vehicleState.getPosition() -1);
-            }  
-            return vehicleState;
+	public VehicleData moveBackward() {
+            if (vehicleData.getPosition() !=0 ){
+                vehicleData.setPosition(vehicleData.getPosition() -1);
+            }
+            return vehicleData;
 	}
 
 
 	@Override
-	public void Park() {
+	public void park() {
+		if (vehicleData.getPosition() < 500){
+
+			while (vehicleData.getPosition() < 500){
+				moveForward();
+
+			}
+		}
 		
 	}
 
 	@Override
-	public void UnPark() {
+	public void unPark() {
 		
 	}
 
 	@Override
-	public void WhereIs() {
+	public void whereIs() {
 		
 	}
 

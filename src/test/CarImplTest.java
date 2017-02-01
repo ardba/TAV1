@@ -1,20 +1,9 @@
 package test;
-        /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 import main.CarImpl;
-import main.VehicleState;
-import org.junit.Test;
+import main.VehicleData;
+import org.junit.*;
 
-import org.junit.jupiter.api.Assertions;
-
-
-/**
- *
- * @author sanja
- */
 public class CarImplTest {
     
     public CarImplTest() {
@@ -23,16 +12,16 @@ public class CarImplTest {
     /**
      * Test of MoveForward method, of class main.CarImpl.
      */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testMoveForward() {
         System.out.println("MoveForward");
         //  Pre-condition: The car is not on the end of the street and the car is not parked.
         CarImpl instance = new CarImpl();
         //Test-cases: testMoveForward();
-        VehicleState vehicleState = new VehicleState();
-        vehicleState = instance.MoveForward();
+        VehicleData vehicleData = new VehicleData();
+        vehicleData = instance.moveForward();
         // Post-condition: The car is moved 1m forward.
-         Assertions.assertEquals(1, vehicleState.getPosition());
+         Assert.assertEquals(1, vehicleData.getPosition());
     }
 
     /**
@@ -44,7 +33,7 @@ public class CarImplTest {
         CarImpl instance = new CarImpl();
         instance.isEmpty();
         // TODO review the generated test code and remove the default call to fail.
-        Assertions.fail("The test case is a prototype.");
+        Assert.fail("The test case is a prototype.");
     }
 
     /**
@@ -54,12 +43,12 @@ public class CarImplTest {
     public void testMoveBackward() {
        //Pre-condition: The car is not at the beginning of the street.
         CarImpl instance = new CarImpl();
-        instance.MoveForward();
+        instance.moveForward();
         //Test-cases: testMoveBackward();
-         VehicleState vehicleState = new VehicleState(); //save result in this
-         vehicleState = instance.MoveBackward();
+         VehicleData vehicleData = new VehicleData(); //save result in this
+         vehicleData = instance.moveBackward();
          //Post-condition: The car is moved 1m backward.
-         Assertions.assertEquals(0, vehicleState.getPosition());
+         Assert.assertEquals(0, vehicleData.getPosition());
     }
 
     /**
@@ -69,9 +58,9 @@ public class CarImplTest {
     public void testPark() {
         System.out.println("Park");
         CarImpl instance = new CarImpl();
-        instance.Park();
+        instance.park();
         // TODO review the generated test code and remove the default call to fail.
-        Assertions.fail("The test case is a prototype.");
+        Assert.fail("The test case is a prototype.");
     }
 
     /**
@@ -81,9 +70,9 @@ public class CarImplTest {
     public void testUnPark() {
         System.out.println("UnPark");
         CarImpl instance = new CarImpl();
-        instance.UnPark();
+        instance.park();
         // TODO review the generated test code and remove the default call to fail.
-        Assertions.fail("The test case is a prototype.");
+        Assert.fail("The test case is a prototype.");
     }
 
     /**
@@ -93,9 +82,9 @@ public class CarImplTest {
     public void testWhereIs() {
         System.out.println("WhereIs");
         CarImpl instance = new CarImpl();
-        instance.WhereIs();
+        instance.whereIs();
         // TODO review the generated test code and remove the default call to fail.
-        Assertions.fail("The test case is a prototype.");
+        Assert.fail("The test case is a prototype.");
     }
     
 }
