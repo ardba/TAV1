@@ -32,8 +32,22 @@ public interface Car {
 	public VehicleData moveBackward();
 
 	public void park();
-
+	/**
+	 Description: The car is set to not parked and moves to the front of the parking space where it was parked.
+	 Pre-condition: The car status is parked.
+	 Post-condition: The car status is not parked and it's location is in front of where it was previously parked.
+	 Test-cases:
+	 testUnParkWhenCarIsParked:  The car drives out of the parking place. Expected output: Car moved five meters and its stated as unparked.
+	 testUnParkWhenCarIsNotParked: The car is not parked. Expected output: The status of the car isn't changed.
+	 */
 	public void unPark();
 
+	/**
+	 Description: Returns the car's vehicle data, containing its location and parking status.
+	 Pre-condition: -
+	 Post-condition: -
+	 Test-cases:
+	 testWhereIs: Expected output: The car's vehicle data.
+	 */
 	public VehicleData whereIs();
 }
