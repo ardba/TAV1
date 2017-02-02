@@ -63,7 +63,7 @@ public class CarImpl implements Car {
 			sensor1Measurement = popular;
 		}
 
-		/*//If sensor 2 is in the range of the street, between 0 & 500
+		//If sensor 2 is in the range of the street, between 0 & 500
 		if (sensor2 >= 0) {
 			int[] sensor2Distance = sensor.getDistance(sensor2);
 			counter = 1;
@@ -92,8 +92,8 @@ public class CarImpl implements Car {
 			}
 		} else {
 			return sensor1Measurement;
-		}*/
-		return sensor1Measurement;
+		}
+
 	}
 
 	@Override

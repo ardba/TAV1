@@ -16,7 +16,13 @@ public class VehicleData{
     }
 
     public void setPosition(int position) {
-        this.position = position;
+        if (position > 499) {
+            this.position = 499;
+        } else if (position < 0) {
+            this.position = 0;
+        } else {
+            this.position = position;
+        }
     }
 
     public boolean isParked() {
