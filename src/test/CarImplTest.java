@@ -87,8 +87,8 @@ public class CarImplTest {
     public void testPark() {
        // System.out.println("Park");
         CarImpl car = new CarImpl();
-        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.getVehicleData().getPosition());
-        Assert.assertTrue("Car should not be parked", false == car.getVehicleData().isParked());
+        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+        Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         // TODO add more
     }
 
@@ -99,13 +99,13 @@ public class CarImplTest {
     public void testUnPark() {
      //   System.out.println("UnPark");
         CarImpl instance = new CarImpl();
-        instance.getVehicleData().setParked(true); //makes the car parked to begin with
+        instance.whereIs().setParked(true); //makes the car parked to begin with
         int randomPos =(int) Math.random()*495; //creates a random valid parking spot
-        instance.getVehicleData().setPosition(randomPos); //moves the car to the parking spot
+        instance.whereIs().setPosition(randomPos); //moves the car to the parking spot
 
         instance.unPark(); //unpark the car
-        Assert.assertEquals(false,instance.getVehicleData().isParked()); //expect the car to be unparked
-        Assert.assertEquals(randomPos+5, instance.getVehicleData().getPosition()); //expect the car to move forward from the parking spot
+        Assert.assertEquals(false,instance.whereIs().isParked()); //expect the car to be unparked
+        Assert.assertEquals(randomPos+5, instance.whereIs().getPosition()); //expect the car to move forward from the parking spot
     }
 
     /**
@@ -115,9 +115,8 @@ public class CarImplTest {
     public void testWhereIs() {
        // System.out.println("WhereIs");
         CarImpl instance = new CarImpl();
-        instance.whereIs();
-        // TODO review the generated test code and remove the default call to fail.
-        Assert.fail("The test case is a prototype.");
+        VehicleData vehicleData = new VehicleData();
+        Assert.assertEquals(vehicleData, instance.whereIs());
     }
     
 }
