@@ -48,7 +48,7 @@ public class VehicleData{
     }
 
     public boolean equals(VehicleData o) {
-        if((o.getPosition() == this.position) && (o.isParked() == this.isParked) && (this.freeSpace == o.getFreeSpace())){
+        if((o.getPosition() == this.position) && (o.isParked() == this.isParked)){
             return true;
         }
         else{
