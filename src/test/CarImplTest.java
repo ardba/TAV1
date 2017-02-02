@@ -70,30 +70,30 @@ public class CarImplTest {
     public void testIsEmptyWhenAtStartOfStreet() {
         System.out.println("isEmpty");
         //Pre-condition: The car is at the beginning of the street and returns
-        //a value between 0 and 200
+        //a value between -1 and 200
         CarImpl car = new CarImpl();
-        car.whereIs().setPosition(1);
+        car.whereIs().setPosition(0);
         boolean isWithinTheRange;
-        if (car.isEmpty() <= 200 && car.isEmpty() >= 0) {
+        if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
             isWithinTheRange = true;
         } else {
             isWithinTheRange = false;
         }
-        Assert.assertTrue("The range is between 0 and 200", isWithinTheRange);
+        Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
     }
 
     @Test
     public void testIsEmptyWhenAtEndOfStreet() {
         System.out.println("isEmpty");
         CarImpl car = new CarImpl();
-        car.whereIs().setPosition(0);
+        car.whereIs().setPosition(499);
         boolean isWithinTheRange;
-        if (car.isEmpty() <= 200 && car.isEmpty() >= 0) {
+        if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
             isWithinTheRange = true;
         } else {
             isWithinTheRange = false;
         }
-        Assert.assertTrue("The range is between 0 and 200", isWithinTheRange);
+        Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
     }
 
     /**

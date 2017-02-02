@@ -18,6 +18,17 @@ public interface Car {
 	 */
 	public VehicleData moveForward();
 
+
+	/**
+	 Description: This method is queries the two sensors in the car, one in the front & one in
+	 the back, and returns the distance to the object closest to either of the two.
+	 Pre-condition: The car is within the bounds of the street.
+	 Post-condition: The sensors have measured the distance to objects closest to the car's right hand side.
+	 Test-cases:
+	 TC1. Measure distance while parked. Expected output: Distance -1 (meaning empty)
+	 TC2. Measure distance while in position 0. Expected output: Distance between 0 and 200, or -1.
+	 TC3. Measure distance while in position 499. Expected output: Distance between 0 and 200.
+	 */
 	public int isEmpty();
 
 	/**
