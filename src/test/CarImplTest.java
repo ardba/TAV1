@@ -4,6 +4,8 @@ import main.CarImpl;
 import main.VehicleData;
 import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
+
 public class CarImplTest {
     
     public CarImplTest() {
@@ -15,21 +17,36 @@ public class CarImplTest {
     @Test
     public void testMoveForward() {
         System.out.println("MoveForward");
-        //  Pre-condition: The car is not on the end of the street and the car is not parked.
+        //  Pre-condition: The car is at the beginning of the street and the car is not parked.
+        //TC1: Create car at the beginning of the street.
         CarImpl instance = new CarImpl();
-        //Test-cases: testMoveForward();
         VehicleData vehicleData = new VehicleData();
+        //Expected output: Position 0m.
+        assertEquals(0, vehicleData.getPosition());
+        //TC2: Move forward.
         vehicleData = instance.moveForward();
-        // Post-condition: The car is moved 1m forward.
-         Assert.assertEquals(1, vehicleData.getPosition());
+        //Expected output: Position 1m and car not parked.
+        assertEquals(1, vehicleData.getPosition());
+        //TC3: Move forward 499 times.
+        for (int i = 0; i < 499; i++){
+            instance.moveForward();
+        }
+        //Expected output: Position 500m.
+        assertEquals(500, vehicleData.getPosition());
+        //TC4: Move forward from 500m.
+        vehicleData = instance.moveForward();
+        //Expected output: Position 500m.
+
+        assertEquals(500, vehicleData.getPosition());
     }
+
 
     /**
      * Test of isEmpty method, of class main.CarImpl.
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
+       // System.out.println("isEmpty");
         CarImpl instance = new CarImpl();
         instance.isEmpty();
         // TODO review the generated test code and remove the default call to fail.
@@ -41,14 +58,26 @@ public class CarImplTest {
      */
     @Test
     public void testMoveBackward() {
-       //Pre-condition: The car is not at the beginning of the street.
+        //Pre-condition: The car is at the end of the street.
         CarImpl instance = new CarImpl();
-        instance.moveForward();
-        //Test-cases: testMoveBackward();
-         VehicleData vehicleData = new VehicleData(); //save result in this
-         vehicleData = instance.moveBackward();
-         //Post-condition: The car is moved 1m backward.
-         Assert.assertEquals(0, vehicleData.getPosition());
+        for (int i = 0; i <= 499; i++) {
+            instance.moveForward();
+        }
+
+        //TC1: The car moves 1m backward.
+        VehicleData vehicleData = new VehicleData(); //save result in this
+        vehicleData = instance.moveBackward();
+        // Expected output: Car is on position 499m.
+        assertEquals(499, vehicleData.getPosition());
+        //TC2: The car moves backward 499 times.
+        for (int i = 499; i > 0; i--) {
+            instance.moveBackward();
+        }
+        // Expected output: Position 0m.
+        assertEquals(0, vehicleData.getPosition());
+        //TC3: The car moves backward.
+        instance.moveBackward();
+        assertEquals(0, vehicleData.getPosition());
     }
 
     /**
@@ -56,7 +85,7 @@ public class CarImplTest {
      */
     @Test
     public void testPark() {
-        System.out.println("Park");
+       // System.out.println("Park");
         CarImpl car = new CarImpl();
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.getVehicleData().getPosition());
         Assert.assertTrue("Car should not be parked", false == car.getVehicleData().isParked());
@@ -68,7 +97,7 @@ public class CarImplTest {
      */
     @Test
     public void testUnPark() {
-        System.out.println("UnPark");
+     //   System.out.println("UnPark");
         CarImpl instance = new CarImpl();
         instance.park();
         // TODO review the generated test code and remove the default call to fail.
@@ -80,7 +109,7 @@ public class CarImplTest {
      */
     @Test
     public void testWhereIs() {
-        System.out.println("WhereIs");
+       // System.out.println("WhereIs");
         CarImpl instance = new CarImpl();
         instance.whereIs();
         // TODO review the generated test code and remove the default call to fail.
