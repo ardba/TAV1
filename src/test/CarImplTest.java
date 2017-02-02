@@ -88,7 +88,7 @@ public class CarImplTest {
         CarImpl car = new CarImpl();
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
-        car.prallelPark();
+        car.paralelPark();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
         Assert.assertTrue("Car should be in parking space", car.whereIs().getPosition() == car.whereIs().getFreeSpace());
     }
@@ -122,7 +122,7 @@ public class CarImplTest {
         instance.whereIs().setParked(true); //makes the car parked to begin with
         int randomPos =(int) Math.random()*495; //creates a random valid parking spot
         instance.whereIs().setPosition(randomPos); //moves the car to the parking spot
-
+        instance.unPark();
         VehicleData vehicleData = new VehicleData(); //Create a control vehicle data, the one we expect the car to have
         vehicleData.setPosition(randomPos + 5);         //Make it have the same position as the car
         vehicleData.setParked(false);               //Make it not be parked (redundant)

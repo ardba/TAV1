@@ -44,7 +44,12 @@ public class CarImpl implements Car {
 
 	@Override
 	public void unPark() {
-		
+        if(vehicleData.isParked()){ //testUnparkWhenCarIsNotParked: requires the vehicle not to change when it isn't parked
+            for(int i = 0; i<5; i++){
+                moveForward(); //testUnparkWhenCarIsParked: Moves forward 5 times, getting away of the parking place
+          }
+            vehicleData.setParked(false); //testUnparkWhenCarIsParked: change the vehicle status
+        }
 	}
 
 	@Override
@@ -55,7 +60,7 @@ public class CarImpl implements Car {
 	// Additional methods
 
 
-    public void prallelPark(){
+    public void paralelPark(){
 		vehicleData.setPosition(vehicleData.getFreeSpace());
 		vehicleData.setParked(true);
     }
