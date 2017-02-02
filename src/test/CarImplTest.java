@@ -73,9 +73,12 @@ public class CarImplTest {
         System.out.println("UnPark");
         CarImpl instance = new CarImpl();
         instance.getVehicleData().setParked(true); //makes the car parked to begin with
-        instance.getVehicleData().setPosition((int) Math.random()*500); //moves the car to a random place in the road
+        int randomPos =(int) Math.random()*495; //creates a random valid parking spot
+        instance.getVehicleData().setPosition(randomPos); //moves the car to the parking spot
+
         instance.unPark(); //unpark the car
-        Assert.assertEquals(false,instance.getVehicleData().isParked());
+        Assert.assertEquals(false,instance.getVehicleData().isParked()); //expect the car to be unparked
+        Assert.assertEquals(randomPos+5, instance.getVehicleData().getPosition()); //expect the car to move forward from the parking spot
     }
 
     /**
