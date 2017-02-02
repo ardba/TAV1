@@ -1,13 +1,10 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class VehicleData{
     
     private int position;
     private boolean isParked;
-    private List<Boolean> freeSpace = new ArrayList<>();
+    private boolean[] freeSpace;
     private boolean parkingSpaceFound;
     private int[] parkingSpace;
 
@@ -15,6 +12,7 @@ public class VehicleData{
         position = 0; // added for moveForward() TC2.
         isParked = false;
         parkingSpaceFound = false;
+        freeSpace = new boolean[500];
     }
 
     public int getPosition() {
@@ -22,13 +20,7 @@ public class VehicleData{
     } // Implemented for testing of moveForward TC1.
 
     public void setPosition(int position) {
-        if (position > 499) {
-            this.position = 499;
-        } else if (position < 0) {
-            this.position = 0;
-        } else {
             this.position = position;
-        }
     }
 
     public boolean isParked() {
@@ -39,12 +31,9 @@ public class VehicleData{
         this.isParked = isParked;
     }
 
-    public List<Boolean> getFreeSpace() {
-        return freeSpace;
-    }
 
-    public void setFreeSpace(boolean isEmpty) {
-        this.freeSpace.add(isEmpty);
+    public void setFreeSpace(int position, boolean isEmpty) {
+        this.freeSpace[position] = isEmpty;
     }
 
     public boolean equals(VehicleData o) {
@@ -68,13 +57,11 @@ public class VehicleData{
     public void setParkingSpace(){
         if (position > 4 && position < 500){
 
-            if (freeSpace.get(position-1) == true &&
-                    freeSpace.get(position-2) == true &&
-                    freeSpace.get(position-3) == true &&
-                    freeSpace.get(position-4) == true &&
-                    freeSpace.get(position-5) == true){
-                parkingSpace = new int[]{position, position-1, position-2, position-3, position-4};
-                parkingSpaceFound = true;
+            for (int i = 0; i < freeSpace.length; i++){
+                if (freeSpace[i] && freeSpace[i-1] && freeSpace[i-2] && freeSpace[i-3] && freeSpace[i-4]){
+                    parkingSpace = new int[]{i-4, i-3, i-2, i-1, i};
+                    parkingSpaceFound = true;
+                }
             }
         }
     }

@@ -1,13 +1,15 @@
 package main;
 
 
+import java.util.Arrays;
+
 public class CarImpl implements Car {
 
-	private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
+	private VehicleData vehicleData;
 	private Sensor sensor;
 
-    public CarImpl() {  // Constructor added due to moveForward() TC2.
-        vehicleData = new VehicleData(); //initialize vehicleData due to moveForward() TC2.
+    public CarImpl() { //initialize vehicleData
+        vehicleData = new VehicleData();
 		sensor = new Sensor();
     }
 
@@ -18,11 +20,19 @@ public class CarImpl implements Car {
         
 	@Override
     //The method for moving the car forward
-	public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC2.
-			if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC3.
-                vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
-				// testing
-				vehicleData.setFreeSpace(false);
+	public VehicleData moveForward() {
+			if(vehicleData.getPosition() != 500){
+                // testing
+                if (isEmpty() == -1){
+                    vehicleData.setFreeSpace(vehicleData.getPosition(), true);
+                }
+                else {
+                    vehicleData.setFreeSpace(vehicleData.getPosition(), false);
+                }
+
+                vehicleData.setPosition(vehicleData.getPosition() +1);
+
+
 	}
             return vehicleData;
         }
@@ -30,23 +40,20 @@ public class CarImpl implements Car {
 	@Override
 	public int isEmpty() {
 
-    	//If car is parked return -1 (-1 being empty)
+    	//If car is parked return empty
     	if (vehicleData.isParked() == true) {
     		return -1;
 		}
 
-		//Create the two sensors: sensor1 being in the front of the car thus taking the same position as the car,
-		//and sensor2 being 5 metres behind the sensor1.
+
     	int sensor1 = vehicleData.getPosition();
     	int sensor2 = sensor1 - 5;
 
-    	//Get 5 readings for the distance from an object to the sensor1.
     	int[] sensor1Distance = sensor.getDistance(sensor1);
-    	//Initialise the default distance to both sensors to be the maximum 200.
     	int sensor1Measurement = 200, sensor2Measurement = 200;
 
-    	//Loop the 5 measurements for sensor1 and get rid of the noise by choosing the value
-		//that shows up the most.
+    	//Loop the 5 measurements and get rid of the noise by choosing the value
+		//that shows up the most times.
 		int counter = 1, tempCounter;
 		int popular = sensor1Distance[0];
 		int temp;
@@ -55,18 +62,20 @@ public class CarImpl implements Car {
 			temp = sensor1Distance[i];
 			tempCounter = 0;
 
-			for (int j = 1; j < sensor1Distance.length; j++) {
+			for (int j = 1; j < sensor1Distance.length; j++)
+			{
 				if (temp == sensor1Distance[j])
 					tempCounter++;
-			} if (tempCounter > counter) {
+			}
+			if (tempCounter > counter)
+			{
 				popular = temp;
 				counter = tempCounter;
 			}
 			sensor1Measurement = popular;
 		}
 
-		//If sensor 2 is in the range of the street, between 0 & 500 (and not -2 for example),
-		//loop the 5 measurements the same way as for sensor1 before.
+		//If sensor 2 is in the range of the street, between 0 & 500
 		if (sensor2 >= 0) {
 			int[] sensor2Distance = sensor.getDistance(sensor2);
 			counter = 1;
@@ -76,26 +85,23 @@ public class CarImpl implements Car {
 				temp = sensor2Distance[i];
 				tempCounter = 0;
 
-				for (int j = 1; j < sensor2Distance.length; j++) {
+				for (int j = 1; j < sensor2Distance.length; j++)
+				{
 					if (temp == sensor2Distance[j])
 						tempCounter++;
-				}if (tempCounter > counter) {
+				}
+				if (tempCounter > counter)
+				{
 					popular = temp;
 					counter = tempCounter;
 				}
 				sensor2Measurement = popular;
 			}
-
-			//Compare the values of both sensors and return the lesser one, that number
-			// being the distance to the closest object to the sensors, or -1 for an empty space.
 			if (sensor1Measurement < sensor2Measurement) {
 				return sensor1Measurement;
 			} else {
 				return sensor2Measurement;
 			}
-
-			//if sensor2 is not in the bounds of the street (for exmaple -2) then return the
-			//value of the sensor1.
 		} else {
 			return sensor1Measurement;
 		}
@@ -104,9 +110,9 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car backward
-	public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC1.
-            if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC2.
-                vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC1.
+	public VehicleData moveBackward() {
+            if (vehicleData.getPosition() !=0 ){
+                vehicleData.setPosition(vehicleData.getPosition() -1);
             }
             return vehicleData;
 	}
@@ -119,7 +125,9 @@ public class CarImpl implements Car {
 			while (vehicleData.getPosition() < 500) {
 				moveForward();
 				if (vehicleData.isParkingSpaceFound()) {
+                    System.out.println(Arrays.toString(vehicleData.getParkingSpace()));
 					prallelPark();
+                    break;
 				}
 			}
 
