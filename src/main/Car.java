@@ -16,7 +16,7 @@ public interface Car {
 	 TC3. Move forward 499 times. Expected output: Position 500m.
 	 TC4. Move forward. Expected output: Position 500m.
 	 */
-	public VehicleData moveForward();
+	public VehicleData moveForward(); // Return type set to VehicleData due to moveForward() TC2.
 
 
 	/**
@@ -40,7 +40,7 @@ public interface Car {
 	 TC2: The car moves backward 499 times. Expected output: Position 0m.
 	 TC3: The car moves backward. Expected output: Position 0m
 	 */
-	public VehicleData moveBackward();
+	public VehicleData moveBackward(); // Return type set to VehicleData due to moveBackward() TC1.
 
 	public void park();
 	/**
@@ -48,8 +48,8 @@ public interface Car {
 	 Pre-condition: The car status is parked.
 	 Post-condition: The car status is not parked and it's location is in front of where it was previously parked.
 	 Test-cases:
-	 testUnParkWhenCarIsParked:  The car drives out of the parking place. Expected output: Car moved five meters and its stated as unparked.
-	 testUnParkWhenCarIsNotParked: The car is not parked. Expected output: The status of the car isn't changed.
+	 TC1: testUnParkWhenCarIsParked:  The car drives out of the parking place. Expected output: Car moved five meters and its stated as unparked.
+	 TC2: testUnParkWhenCarIsNotParked: The car is not parked. Expected output: The status of the car isn't changed.
 	 */
 	public void unPark();
 

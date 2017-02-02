@@ -3,11 +3,11 @@ package main;
 
 public class CarImpl implements Car {
 
-	private VehicleData vehicleData;
+	private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
 	private Sensor sensor;
 
-    public CarImpl() { //initialize vehicleData
-        vehicleData = new VehicleData();
+    public CarImpl() {  // Constructor added due to moveForward() TC2.
+        vehicleData = new VehicleData(); //initialize vehicleData due to moveForward() TC2.
 		sensor = new Sensor();
     }
 
@@ -18,9 +18,9 @@ public class CarImpl implements Car {
         
 	@Override
     //The method for moving the car forward
-	public VehicleData moveForward() {
-			if(vehicleData.getPosition() != 500){
-                vehicleData.setPosition(vehicleData.getPosition() +1);
+	public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC2.
+			if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC3.
+                vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
 				// testing
 				vehicleData.setFreeSpace(false);
 	}
@@ -104,9 +104,9 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car backward
-	public VehicleData moveBackward() {
-            if (vehicleData.getPosition() !=0 ){
-                vehicleData.setPosition(vehicleData.getPosition() -1);
+	public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC1.
+            if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC2.
+                vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC1.
             }
             return vehicleData;
 	}

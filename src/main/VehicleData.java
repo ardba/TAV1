@@ -11,15 +11,15 @@ public class VehicleData{
     private boolean parkingSpaceFound;
     private int[] parkingSpace;
 
-    public VehicleData() {
-        position = 0;
+    public VehicleData() { // Implemented for testing moveForward() TC1.
+        position = 0; // added for moveForward() TC2.
         isParked = false;
         parkingSpaceFound = false;
     }
 
     public int getPosition() {
         return position;
-    }
+    } // Implemented for testing of moveForward TC1.
 
     public void setPosition(int position) {
         if (position > 499) {
