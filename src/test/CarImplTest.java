@@ -14,30 +14,42 @@ public class CarImplTest {
     /**
      * Test of MoveForward method, of class main.CarImpl.
      */
+
+    //  TC1. Create car at the beginning of the street. Expected output: Position 0m.
     @Test
-    public void testMoveForward() {
-        System.out.println("MoveForward");
-        //  Pre-condition: The car is at the beginning of the street and the car is not parked.
-        //TC1: Create car at the beginning of the street.
+    public void testTheCarIsAtTheBeginningOfTheStreet() {
+        VehicleData vehicleData = new VehicleData();   // Create car at the beginning of the street.
+        //Expected output: Position 0m.
+        assertEquals(0, vehicleData.getPosition()); //Test if expected position is 0.
+    }
+    //TC2: Move forward.
+    @Test
+    public void testMoveCarForward() {
+        CarImpl instance = new CarImpl();
+        VehicleData vehicleData;
+        vehicleData = instance.moveForward(); //move the car forward
+        //Expected output: Position 1m and car not parked.
+        assertEquals(1, vehicleData.getPosition()); //Expected result should be 1 as result of moving the car for 1m.
+    }
+    //TC3: Move forward 499 times.
+    @Test
+    public void testMoveCarForwardToTheEndOfTheStreet() {
         CarImpl instance = new CarImpl();
         VehicleData vehicleData = new VehicleData();
-        //Expected output: Position 0m.
-        assertEquals(0, vehicleData.getPosition());
-        //TC2: Move forward.
-        vehicleData = instance.moveForward();
-        //Expected output: Position 1m and car not parked.
-        assertEquals(1, vehicleData.getPosition());
-        //TC3: Move forward 499 times.
-        for (int i = 0; i < 499; i++){
-            instance.moveForward();
+        for (int i = 0; i <= 499; i++) { //Move the car 499 times
+            vehicleData =instance.moveForward();
         }
-        //Expected output: Position 500m.
-        assertEquals(500, vehicleData.getPosition());
-        //TC4: Move forward from 500m.
-        vehicleData = instance.moveForward();
-        //Expected output: Position 500m.
-
-        assertEquals(500, vehicleData.getPosition());
+        assertEquals(500, vehicleData.getPosition());     //Expected output: Position 500m.
+    }
+    //TC4. Move forward. Expected output: Position 500m.
+    @Test
+    public void testMoveCarForward1m(){
+        CarImpl instance = new CarImpl();
+        VehicleData vehicleData1 = new VehicleData();
+        for (int i = 0; i <= 499; i++) { //Try to move car further than 499m.
+            vehicleData1 = instance.moveForward();
+        }
+        assertEquals(500, vehicleData1.getPosition());  //Expected output: Position 500m.
     }
 
 
@@ -73,16 +85,38 @@ public class CarImplTest {
     /**
      * Test of MoveBackward method, of class main.CarImpl.
      */
+    //TC1. The car moves 1m backward. Expected output: Car is on position 499m.
     @Test
-    public void testMoveBackward() {
-       //Pre-condition: The car is not at the beginning of the street.
+    public void testMoveBackward1m() {
+        //Pre-condition: The car is at the end of the street.
         CarImpl instance = new CarImpl();
-        instance.moveForward();
-        //Test-cases: testMoveBackward();
-         VehicleData vehicleData = new VehicleData(); //save result in this
-         vehicleData = instance.moveBackward();
-         //Post-condition: The car is moved 1m backward.
-         Assert.assertEquals(0, vehicleData.getPosition());
+        for (int i = 0; i <= 499; i++){
+            instance.moveForward();
+        }
+        //TC1: The car moves 1m backward.
+        VehicleData vehicleData ; //save result in this
+        vehicleData = instance.moveBackward();
+        assertEquals(499, vehicleData.getPosition());
+
+    }
+    @Test
+
+    public void testCarisMovedBackward499m() {
+          CarImpl instance = new CarImpl();
+          VehicleData vehicleData = new VehicleData(); //save result in this
+          //TC2: The car moves backward 499 times.
+          for (int i = 499; i > 0; i--) {
+              instance.moveBackward(); //Move the car at the beginning of the street
+          }
+          assertEquals(0, vehicleData.getPosition());// Expected output: Position 0m.
+      }
+      //TC2: The car moves backward 499 times. Expected output: Position 0m.
+    @Test
+        public void testMoveBackwardFromBeginningOfTheStreet(){
+        CarImpl instance = new CarImpl();
+        VehicleData vehicleData = new VehicleData(); //save result in this
+        instance.moveBackward(); //The car moves backward.
+        assertEquals(0, vehicleData.getPosition()); //Expected position of the car is 0.
     }
 
     /**
@@ -102,6 +136,7 @@ public class CarImplTest {
 
     @Test
     public void testParkwhenStreetisFull() {
+        CarImpl car = new CarImpl();
 
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());

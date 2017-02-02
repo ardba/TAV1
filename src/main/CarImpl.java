@@ -15,7 +15,7 @@ public class CarImpl implements Car {
 		vehicleData = new VehicleData();
 		sensor = new Sensor();
 	}
-        
+
 	@Override
 	public VehicleData moveForward() {
             if(vehicleData.getPosition() != 500){
