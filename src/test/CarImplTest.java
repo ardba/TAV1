@@ -58,7 +58,6 @@ public class CarImplTest {
      */
     @Test
     public void testIsEmptyWhileParked() {
-        System.out.println("isEmpty");
         //Pre-condition: The car is parked
         CarImpl car = new CarImpl();
         car.whereIs().setParked(true);
@@ -68,7 +67,6 @@ public class CarImplTest {
 
     @Test
     public void testIsEmptyWhenAtStartOfStreet() {
-        System.out.println("isEmpty");
         //Pre-condition: The car is at the beginning of the street and returns
         //a value between 0 and 200
         CarImpl car = new CarImpl();
@@ -84,7 +82,6 @@ public class CarImplTest {
 
     @Test
     public void testIsEmptyWhenAtEndOfStreet() {
-        System.out.println("isEmpty");
         CarImpl car = new CarImpl();
         car.whereIs().setPosition(0);
         boolean isWithinTheRange;

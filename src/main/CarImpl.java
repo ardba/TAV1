@@ -125,7 +125,6 @@ public class CarImpl implements Car {
 			while (vehicleData.getPosition() < 500) {
 				moveForward();
 				if (vehicleData.isParkingSpaceFound()) {
-                    System.out.println(Arrays.toString(vehicleData.getParkingSpace()));
 					prallelPark();
                     break;
 				}
