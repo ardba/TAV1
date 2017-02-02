@@ -15,5 +15,5 @@ public interface Car {
 
 	public void unPark();
 
-	public void whereIs();
+	public VehicleData whereIs();
 }

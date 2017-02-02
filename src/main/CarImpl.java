@@ -116,18 +116,16 @@ public class CarImpl implements Car {
 	}
 
 	@Override
-	public void whereIs() {
-		
+	public VehicleData whereIs() {
+		return vehicleData; //Returns the expected vehicle data
 	}
 
 	// Additional methods
 
-	public VehicleData getVehicleData(){
-        return vehicleData;
-    }
 
     public void prallelPark(){
-
+		vehicleData.setPosition(vehicleData.getFreeSpace());
+		vehicleData.setParked(true);
     }
 
 }

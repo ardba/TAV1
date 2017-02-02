@@ -1,17 +1,14 @@
 package main;
 
-import java.util.ArrayList;
-
 public class VehicleData {
     
     private int position;
     private boolean isParked;
-    private ArrayList<Integer> freeSpace;
+    private int freeSpace;
 
     public VehicleData() {
         position = 0;
         isParked = false;
-        freeSpace = new ArrayList<Integer>();
     }
 
     public int getPosition() {
@@ -29,6 +26,12 @@ public class VehicleData {
     public void setParked(boolean isParked) {
         this.isParked = isParked;
     }
-    
-    
+
+    public int getFreeSpace() {
+        return freeSpace;
+    }
+
+    public void setFreeSpace(int freeSpace) {
+        this.freeSpace = freeSpace;
+    }
 }
