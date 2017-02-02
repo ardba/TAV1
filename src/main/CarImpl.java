@@ -2,7 +2,7 @@ package main;
 
 public class CarImpl implements Car {
 
-	VehicleData vehicleData;
+	private VehicleData vehicleData;
 
     public CarImpl() { //initialize vehicleData
         vehicleData = new VehicleData();
@@ -51,5 +51,15 @@ public class CarImpl implements Car {
 	public void whereIs() {
 		
 	}
+
+	// Additional methods
+
+	public VehicleData getVehicleData(){
+        return vehicleData;
+    }
+
+    public void prallelPark(){
+
+    }
 
 }

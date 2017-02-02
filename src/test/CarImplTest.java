@@ -57,10 +57,10 @@ public class CarImplTest {
     @Test
     public void testPark() {
         System.out.println("Park");
-        CarImpl instance = new CarImpl();
-        instance.park();
-        // TODO review the generated test code and remove the default call to fail.
-        Assert.fail("The test case is a prototype.");
+        CarImpl car = new CarImpl();
+        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.getVehicleData().getPosition());
+        Assert.assertTrue("Car should not be parked", false == car.getVehicleData().isParked());
+        // TODO add more
     }
 
     /**
