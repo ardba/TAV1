@@ -56,7 +56,8 @@ public class CarImpl implements Car {
 
 
     public void prallelPark(){
-
+		vehicleData.setPosition(vehicleData.getFreeSpace());
+		vehicleData.setParked(true);
     }
 
 }

@@ -85,11 +85,12 @@ public class CarImplTest {
      */
     @Test
     public void testPark() {
-       // System.out.println("Park");
         CarImpl car = new CarImpl();
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
-        // TODO add more
+        car.prallelPark();
+        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
+        Assert.assertTrue("Car should be in parking space", car.whereIs().getPosition() == car.whereIs().getFreeSpace());
     }
 
     /**
