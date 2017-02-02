@@ -97,17 +97,45 @@ public class CarImplTest {
      * Test of UnPark method, of class main.CarImpl.
      */
     @Test
-    public void testUnPark() {
+    public void testUnParkWhenCarIsNotParked() {
      //   System.out.println("UnPark");
+        CarImpl instance = new CarImpl();
+        int randomPos =(int) Math.random()*495; //A random position on the street
+        instance.whereIs().setPosition(randomPos); //moves the car to the random position
+        instance.whereIs().setParked(false); //makes sure the car is parked (redundant)
+        instance.unPark(); //unpark the car
+
+        VehicleData vehicleData = new VehicleData(); //Create a control vehicle data, the one we expect the car to have
+        vehicleData.setPosition(randomPos);         //Make it have the same position as the car
+        vehicleData.setParked(false);               //Make it not be parked (redundant)
+
+        Assert.assertTrue("Car should have the same position and status as before",
+                instance.whereIs().equals(vehicleData));
+        /*Compare both vehicle data, the car should
+        have the same position and parked status as before since it isn't supposed to change.*/
+    }
+
+    @Test
+    public void testUnParkWhenCarIsParked() {
+        //   System.out.println("UnPark");
         CarImpl instance = new CarImpl();
         instance.whereIs().setParked(true); //makes the car parked to begin with
         int randomPos =(int) Math.random()*495; //creates a random valid parking spot
         instance.whereIs().setPosition(randomPos); //moves the car to the parking spot
 
-        instance.unPark(); //unpark the car
-        Assert.assertEquals(false,instance.whereIs().isParked()); //expect the car to be unparked
-        Assert.assertEquals(randomPos+5, instance.whereIs().getPosition()); //expect the car to move forward from the parking spot
-    }
+        VehicleData vehicleData = new VehicleData(); //Create a control vehicle data, the one we expect the car to have
+        vehicleData.setPosition(randomPos + 5);         //Make it have the same position as the car
+        vehicleData.setParked(false);               //Make it not be parked (redundant)
+
+        Assert.assertTrue("Car should have changed its position and status",
+                instance.whereIs().equals(vehicleData));
+
+        /*Compare both vehicle data, the car should
+        have the same position and parked status as before since it isn't supposed to change.*/
+
+        }
+
+
 
     /**
      * Test of WhereIs method, of class main.CarImpl.
@@ -117,7 +145,7 @@ public class CarImplTest {
        // System.out.println("WhereIs");
         CarImpl instance = new CarImpl();
         VehicleData vehicleData = new VehicleData();
-        Assert.assertEquals(vehicleData, instance.whereIs());
+        Assert.assertTrue(vehicleData.equals(instance.whereIs()));
     }
     
 }

@@ -1,6 +1,6 @@
 package main;
 
-public class VehicleData {
+public class VehicleData{
     
     private int position;
     private boolean isParked;
@@ -33,5 +33,12 @@ public class VehicleData {
 
     public void setFreeSpace(int freeSpace) {
         this.freeSpace = freeSpace;
+    }
+
+    public boolean equals(VehicleData o) {
+        if(o.getPosition() == this.position && (o.isParked() == this.isParked) && (this.freeSpace == o.getFreeSpace()))
+            return true;
+        else
+            return false;
     }
 }
