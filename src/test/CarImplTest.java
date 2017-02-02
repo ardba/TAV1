@@ -34,8 +34,8 @@ public class CarImplTest {
         //instance.isEmpty();
         // TODO review the generated test code and remove the default call to fail.
 
-        //car.whereIs().setParked(true);
-        //Assert.assertEquals(-1, car.isEmpty() );
+        car.whereIs().setParked(true);
+        Assert.assertEquals(-1, car.isEmpty() );
     }
 
     /**
