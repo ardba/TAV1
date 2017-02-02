@@ -17,7 +17,7 @@ public class VehicleData{
 
     public int getPosition() {
         return position;
-    } // Implemented for testing of moveForward TC1.
+    } // Implemented for testing of moveForward() TC1.
 
     public void setPosition(int position) {
             this.position = position;
