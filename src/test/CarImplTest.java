@@ -149,14 +149,13 @@ public class CarImplTest {
     }
 
     @Test
-    public void testParkwhenStreetisFull() {
-        CarImpl car = new CarImpl();
-
+    public void testParkWhenStreetIsFull() {
+        CarImpl car = new CarImpl("full");
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+        car.park();
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
-        car.paralelPark();
-        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
-        Assert.assertTrue("Car should be in parking space", car.whereIs().getPosition() == car.whereIs().getFreeSpace());
+        Assert.assertTrue("Car should be at the end of the street", 499 == car.whereIs().getPosition());
+
     }
 
     /**

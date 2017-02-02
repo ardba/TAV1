@@ -13,14 +13,16 @@ public class CarImpl implements Car {
 
     public CarImpl(String streetVariation) {
 		vehicleData = new VehicleData();
-		sensor = new Sensor();
+		sensor = new Sensor(streetVariation);
 	}
-
+        
 	@Override
     //The method for moving the car forward
 	public VehicleData moveForward() {
-            if(vehicleData.getPosition() != 500){ // added for test cases for making sure that the car can not move more than 500m.
-                vehicleData.setPosition(vehicleData.getPosition() +1); //increase the position of the car for 1
+			if(vehicleData.getPosition() != 500){
+                vehicleData.setPosition(vehicleData.getPosition() +1);
+				// testing
+				vehicleData.setFreeSpace(false);
 	}
             return vehicleData;
         }
@@ -99,8 +101,7 @@ public class CarImpl implements Car {
 	@Override
     //The method for moving the car backward
 	public VehicleData moveBackward() {
-            if (vehicleData.getPosition() !=0 ){ // Created for test cases to moving car backward for making sure the can not
-                                            // move backward more than the very beginning of the street.
+            if (vehicleData.getPosition() !=0 ){
                 vehicleData.setPosition(vehicleData.getPosition() -1);
             }
             return vehicleData;
@@ -109,14 +110,16 @@ public class CarImpl implements Car {
 
 	@Override
 	public void park() {
-		if (vehicleData.getPosition() < 500){
+		if (vehicleData.getPosition() < 500) {
 
-			while (vehicleData.getPosition() < 500){
+			while (vehicleData.getPosition() < 500) {
 				moveForward();
-
+				if (vehicleData.isParkingSpaceFound()) {
+					prallelPark();
+				}
 			}
+
 		}
-		
 	}
 
 	@Override
@@ -137,8 +140,8 @@ public class CarImpl implements Car {
 	// Additional methods
 
 
-    public void paralelPark(){
-		vehicleData.setPosition(vehicleData.getFreeSpace());
+    public void prallelPark(){
+		vehicleData.setPosition(vehicleData.getPosition()-5);
 		vehicleData.setParked(true);
     }
 
