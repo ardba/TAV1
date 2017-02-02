@@ -5,23 +5,25 @@ import java.util.Arrays;
 
 public class CarImpl implements Car {
 
-	private VehicleData vehicleData;
+    private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
 	private Sensor sensor;
 
-    public CarImpl() { //initialize vehicleData
-        vehicleData = new VehicleData();
-		sensor = new Sensor();
+    public CarImpl() {  // Constructor added due to moveForward() TC2.
+        vehicleData = new VehicleData(); //initialize vehicleData due to moveForward() TC2.
+
+        sensor = new Sensor();
     }
 
     public CarImpl(String streetVariation) {
 		vehicleData = new VehicleData();
 		sensor = new Sensor(streetVariation);
 	}
-        
+
 	@Override
     //The method for moving the car forward
-	public VehicleData moveForward() {
-			if(vehicleData.getPosition() != 500){
+    //The method for moving the car forward
+    public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC2.
+        if(vehicleData.getPosition() != 499){ // If statement for checking if position is not 499 is created in moveForward() TC3.
                 // testing
                 if (isEmpty() == -1){
                     vehicleData.setFreeSpace(vehicleData.getPosition(), true);
@@ -30,7 +32,7 @@ public class CarImpl implements Car {
                     vehicleData.setFreeSpace(vehicleData.getPosition(), false);
                 }
 
-                vehicleData.setPosition(vehicleData.getPosition() +1);
+            vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
 
 
 	}
@@ -110,15 +112,15 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car backward
-	public VehicleData moveBackward() {
-            if (vehicleData.getPosition() !=0 ){
-                vehicleData.setPosition(vehicleData.getPosition() -1);
-            }
-            return vehicleData;
-	}
+    public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC1.
+        if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC2.
+            vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC1.
+        }
+        return vehicleData;
+    }
 
 
-	@Override
+    @Override
 	public void park() {
 		if (vehicleData.getPosition() < 500) {
 
