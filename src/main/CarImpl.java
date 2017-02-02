@@ -8,7 +8,13 @@ public class CarImpl implements Car {
 
     public CarImpl() { //initialize vehicleData
         vehicleData = new VehicleData();
+		sensor = new Sensor();
     }
+
+    public CarImpl(String streetVariation) {
+		vehicleData = new VehicleData();
+		sensor = new Sensor();
+	}
         
 	@Override
 	public VehicleData moveForward() {
@@ -20,8 +26,6 @@ public class CarImpl implements Car {
 
 	@Override
 	public int isEmpty() {
-
-    	Sensor sensor = new Sensor();
 
     	//If car is parked return empty
     	if (vehicleData.isParked() == true) {
