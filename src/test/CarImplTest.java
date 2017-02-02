@@ -45,12 +45,29 @@ public class CarImplTest {
      * Test of isEmpty method, of class main.CarImpl.
      */
     @Test
-    public void testIsEmpty() {
-       // System.out.println("isEmpty");
-        CarImpl instance = new CarImpl();
-        instance.isEmpty();
-        // TODO review the generated test code and remove the default call to fail.
-        Assert.fail("The test case is a prototype.");
+    public void testIsEmptyWhileParked() {
+        System.out.println("isEmpty");
+        //Pre-condition: The car is parked
+        CarImpl car = new CarImpl();
+        car.whereIs().setParked(true);
+        //Post-condition: The car returns -1 because it's parked.
+        Assert.assertEquals(-1, car.isEmpty() );
+    }
+
+    @Test
+    public void testIsEmptyWhileAtStartOfStreet() {
+        System.out.println("isEmpty");
+        //Pre-condition: The car is at the beginning of the street and returns
+        //a value between 0 and 200
+        CarImpl car = new CarImpl();
+        car.whereIs().setPosition(1);
+        boolean isWithinTheRange;
+        if (car.isEmpty() <= 200 && car.isEmpty() >= 0) {
+            isWithinTheRange = true;
+        } else {
+            isWithinTheRange = false;
+        }
+        Assert.assertTrue("The range is between 0 and 200", isWithinTheRange);
     }
 
     /**
@@ -58,26 +75,14 @@ public class CarImplTest {
      */
     @Test
     public void testMoveBackward() {
-        //Pre-condition: The car is at the end of the street.
+       //Pre-condition: The car is not at the beginning of the street.
         CarImpl instance = new CarImpl();
-        for (int i = 0; i <= 499; i++) {
-            instance.moveForward();
-        }
-
-        //TC1: The car moves 1m backward.
-        VehicleData vehicleData = new VehicleData(); //save result in this
-        vehicleData = instance.moveBackward();
-        // Expected output: Car is on position 499m.
-        assertEquals(499, vehicleData.getPosition());
-        //TC2: The car moves backward 499 times.
-        for (int i = 499; i > 0; i--) {
-            instance.moveBackward();
-        }
-        // Expected output: Position 0m.
-        assertEquals(0, vehicleData.getPosition());
-        //TC3: The car moves backward.
-        instance.moveBackward();
-        assertEquals(0, vehicleData.getPosition());
+        instance.moveForward();
+        //Test-cases: testMoveBackward();
+         VehicleData vehicleData = new VehicleData(); //save result in this
+         vehicleData = instance.moveBackward();
+         //Post-condition: The car is moved 1m backward.
+         Assert.assertEquals(0, vehicleData.getPosition());
     }
 
     /**
@@ -86,6 +91,18 @@ public class CarImplTest {
     @Test
     public void testPark() {
         CarImpl car = new CarImpl();
+//        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+//        Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
+//        car.prallelPark();
+//        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
+//        Assert.assertTrue("Car should be in parking space", car.whereIs().getPosition() == car.whereIs().getFreeSpace());
+
+
+    }
+
+    @Test
+    public void testParkwhenStreetisFull() {
+
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         car.paralelPark();

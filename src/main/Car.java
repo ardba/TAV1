@@ -7,7 +7,7 @@ public interface Car {
 	
 	public VehicleData moveForward();
 
-	public void isEmpty();
+	public int isEmpty();
 
 	public VehicleData moveBackward();
 

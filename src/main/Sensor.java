@@ -6,6 +6,10 @@ public class Sensor {
     //for each meter.
     private int[] distance = new int[2500];
 
+    public Sensor(String streetVariation){
+
+    }
+
     public Sensor() {
 
         //Populate array distance with random numbers between 0 and 200
