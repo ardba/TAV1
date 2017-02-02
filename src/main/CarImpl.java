@@ -21,13 +21,15 @@ public class CarImpl implements Car {
 	@Override
 	public int isEmpty() {
 
+    	Sensor sensor = new Sensor();
+
     	//If car is parked return empty
     	if (vehicleData.isParked() == true) {
     		return -1;
 		}
 
-		return 0;
-  /*  	int sensor1 = vehicleData.getPosition();
+
+    	int sensor1 = vehicleData.getPosition();
     	int sensor2 = sensor1 - 5;
 
     	int[] sensor1Distance = sensor.getDistance(sensor1);
@@ -56,7 +58,7 @@ public class CarImpl implements Car {
 			sensor1Measurement = popular;
 		}
 
-		//If sensor 2 is in the range of the street, between 0 & 500
+		/*//If sensor 2 is in the range of the street, between 0 & 500
 		if (sensor2 >= 0) {
 			int[] sensor2Distance = sensor.getDistance(sensor2);
 			counter = 1;
@@ -85,8 +87,8 @@ public class CarImpl implements Car {
 			}
 		} else {
 			return sensor1Measurement;
-		}
-*/
+		}*/
+		return sensor1Measurement;
 	}
 
 	@Override

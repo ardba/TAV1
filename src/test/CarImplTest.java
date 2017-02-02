@@ -30,12 +30,27 @@ public class CarImplTest {
     @Test
     public void testIsEmptyWhileParked() {
         System.out.println("isEmpty");
+        //Pre-condition: The car is parked
         CarImpl car = new CarImpl();
-        //instance.isEmpty();
-        // TODO review the generated test code and remove the default call to fail.
-
         car.whereIs().setParked(true);
+        //Post-condition: The car returns -1 because it's parked.
         Assert.assertEquals(-1, car.isEmpty() );
+    }
+
+    @Test
+    public void testIsEmptyWhileAtStartOfStreet() {
+        System.out.println("isEmpty");
+        //Pre-condition: The car is at the beginning of the street and returns
+        //a value between 0 and 200
+        CarImpl car = new CarImpl();
+        car.whereIs().setPosition(1);
+        boolean isWithinTheRange;
+        if (car.isEmpty() <= 200 && car.isEmpty() >= 0) {
+            isWithinTheRange = true;
+        } else {
+            isWithinTheRange = false;
+        }
+        Assert.assertTrue("The range of the sensors measurement is between 0 and 200", isWithinTheRange);
     }
 
     /**
