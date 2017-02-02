@@ -70,9 +70,10 @@ public class CarImplTest {
     public void testUnPark() {
         System.out.println("UnPark");
         CarImpl instance = new CarImpl();
-        instance.park();
-        // TODO review the generated test code and remove the default call to fail.
-        Assert.fail("The test case is a prototype.");
+        instance.getVehicleData().setParked(true); //makes the car parked to begin with
+        instance.getVehicleData().setPosition((int) Math.random()*500); //moves the car to a random place in the road
+        instance.unPark(); //unpark the car
+        Assert.assertEquals(false,instance.getVehicleData().isParked());
     }
 
     /**
