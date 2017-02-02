@@ -28,12 +28,14 @@ public class CarImplTest {
      * Test of isEmpty method, of class main.CarImpl.
      */
     @Test
-    public void testIsEmpty() {
+    public void testIsEmptyWhileParked() {
         System.out.println("isEmpty");
-        CarImpl instance = new CarImpl();
-        instance.isEmpty();
+        CarImpl car = new CarImpl();
+        //instance.isEmpty();
         // TODO review the generated test code and remove the default call to fail.
-        Assert.fail("The test case is a prototype.");
+
+        //car.whereIs().setParked(true);
+        //Assert.assertEquals(-1, car.isEmpty() );
     }
 
     /**
