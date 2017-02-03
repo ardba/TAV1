@@ -4,19 +4,24 @@ public interface Car {
 
 	
 ////TODO add params and stuff
-	/**
-	 Description:This method is about moving the car 1m forward queries two
-	 	sensors which checks if there is some empty space on the right side of the car
-	 	and gives the current position of the car. The car cannot be moved forward beyond the end of the street.
-	 Pre-condition: The car is at the beginning of the street and the car is not parked.
-	 Post-condition: The car is at the end of the street.
-	 Test-cases:
-	 TC1.Create car at the beginning of the street. Expected output: Position 0m.
-	 TC2. Move forward. Expected output: Position 1m and car not parked.
-	 TC3. Move forward 499 times. Expected output: Position 500m.
-	 TC4. Move forward. Expected output: Position 500m.
-	 */
-	public VehicleData moveForward(); // Return type set to VehicleData due to moveForward() TC2.
+    /**
+     Description:This method moves the car 1 meter forward, queries the two infrared sensors through the isEmpty method described below and returns a data structure that contains the current position of the car,  and the situation of the detected parking places up to now. The car cannot be moved forward beyond the end of the street.
+     Pre-condition: The car is at the beginning of the street and the car is not parked.
+     Post-condition: The car is at the end of the street.
+
+     Test-cases:
+     TC1.
+     Requirement: None. This is a base case interpreted by the team to get a starting point for further testing.
+     Test: Create car at the beginning of the street. Expected output: Position 0.
+     TC2.
+     Requirement: This method moves the car 1 meter forward.
+     Test: Create car at the beginning of the street. Move forward. Expected output: Position 1.
+     TC3.
+     Requirement: The car cannot be moved forward beyond the end of the street.
+     Test: Create car at the beginning of the street. Move car forward 500 times. Expected output: Position 499.
+     */
+
+    public VehicleData moveForward(); // Return type set to VehicleData due to moveForward() TC2.
 
 
 	/**
@@ -31,16 +36,21 @@ public interface Car {
 	 */
 	public int isEmpty();
 
-	/**
-	 Description: The car moves 1m backward. If the car is on the  beginning of the street, it can not move backward.
-	 Pre-condition: The car is at the end of the street.
-	 Post-condition: The car is at the beginning of the street.
-	 Test-cases:
-	 TC1:  The car moves 1m backward. Expected output: Car is on position 499m.
-	 TC2: The car moves backward 499 times. Expected output: Position 0m.
-	 TC3: The car moves backward. Expected output: Position 0m
-	 */
-	public VehicleData moveBackward(); // Return type set to VehicleData due to moveBackward() TC1.
+    /**
+     Description: The car moves 1m backward. If the car is on the  beginning of the street, it can not move backward.
+     Pre-condition: The car is not on the beginning of the street.
+     Post-condition: Post-condition: The car is moved 1 position backward.
+
+     Test-cases:
+     TC1:
+     Requirement: The car moves 1m backward.
+     Test:  Create car at the beginning of the street. Move car forward 499 times. Move car backward .Expected output: Car is on position 498.
+     TC2:
+     Requirement: If the car is on the  beginning of the street, it can not move backward.
+     Test: Create car at the beginning of the street. The car moves backward. Expected output: Position 0.
+     */
+
+    public VehicleData moveBackward(); // Return type set to VehicleData due to moveBackward() TC1.
 
 	public void park();
 	/**
