@@ -35,7 +35,7 @@ public interface Car {
             Expected output: Sensors return 201, indicating an error.
 	 TC2. Measure distance while sensor 2 is out of the bounds of the street at position 0.
             Expected output: Distance between 0 and 200, or -1.
-	 TC3. Measure distance while sensor 2 is out of the bounds of the street at position 503.
+	 TC3. Measure distance while sensor 1 is out of the bounds of the street at position 503.
             Expected output: Distance between 0 and 200.
 	 */
 	public int isEmpty();
