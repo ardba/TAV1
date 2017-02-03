@@ -6,6 +6,19 @@ public class CarImpl implements Car {
     private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
 	private Sensor sensorFront;
 	private Sensor sensorBack;
+    public static final int SENSOR_FRONT = 0;
+    public static final int SENSOR_BACK = 1;
+
+	public Sensor getSensor(int sensor){
+	    switch (sensor){
+            case SENSOR_FRONT:
+                return sensorFront;
+            case SENSOR_BACK:
+                return sensorBack;
+            default:
+                return null;
+        }
+    }
 
     public CarImpl(int streetVariation){
         vehicleData = new VehicleData();
@@ -70,70 +83,84 @@ public class CarImpl implements Car {
         int counter = 1, tempCounter;
         int temp;
 
-    	//If car is parked return empty
-    	if (vehicleData.isParked()) {
-    		return -1;
-		}
+        //If car is parked return empty
+        if (vehicleData.isParked()) {
+            return -1;
+        }
 
 
-    	int sensor1Pos = vehicleData.getPosition();
-    	int sensor2Pos = sensor1Pos - 5;
+        int sensor1Pos = vehicleData.getPosition();
+        int sensor2Pos = sensor1Pos - 5;
+        int sensor1Measurement = 201, sensor2Measurement = 201;
 
 
-    	int sensor1Measurement = 201, sensor2Measurement = 201;
+        if (sensorFront.isActive()) {
+            if (sensor1Pos < 500 && sensor1Pos >= 0) {
+                //Loop the 5 measurements and get rid of the noise by choosing the value
+                //that shows up the most times.
+                int[] sensor1Distance = sensorFront.getDistance(sensor1Pos);
+                int popular = sensor1Distance[0];
 
-    	if (sensor1Pos < 500 && sensor1Pos >= 0) {
-            //Loop the 5 measurements and get rid of the noise by choosing the value
-            //that shows up the most times.
-            int[] sensor1Distance = sensorFront.getDistance(sensor1Pos);
-            int popular = sensor1Distance[0];
 
+                for (int i = 0; i < (sensor1Distance.length - 1); i++) {
+                    temp = sensor1Distance[i];
+                    tempCounter = 0;
 
-            for (int i = 0; i < (sensor1Distance.length - 1); i++) {
-                temp = sensor1Distance[i];
-                tempCounter = 0;
+                    if(temp > 201) sensorFront.disable();
 
-                for (int j = 1; j < sensor1Distance.length; j++) {
-                    if (temp == sensor1Distance[j])
-                        tempCounter++;
+                    for (int j = 1; j < sensor1Distance.length; j++) {
+                        if (temp == sensor1Distance[j])
+                            tempCounter++;
+                    }
+                    if (tempCounter > counter) {
+                        popular = temp;
+                        counter = tempCounter;
+                    }
+                    sensor1Measurement = popular;
                 }
-                if (tempCounter > counter) {
-                    popular = temp;
-                    counter = tempCounter;
-                }
-                sensor1Measurement = popular;
             }
         }
 
-		//If sensor 2 is in the range of the street, between 0 & 500
-		if (sensor2Pos >= 0 && sensor2Pos < 500) {
-            int[] sensor2Distance = sensorBack.getDistance(sensor2Pos);
-            counter = 1;
-            int popular = sensor2Distance[0];
 
-            for (int i = 0; i < (sensor2Distance.length - 1); i++) {
-                temp = sensor2Distance[i];
-                tempCounter = 0;
+        if (sensorBack.isActive()) {
+            //If sensor 2 is in the range of the street, between 0 & 500
+            if (sensor2Pos >= 0 && sensor2Pos < 500) {
+                int[] sensor2Distance = sensorBack.getDistance(sensor2Pos);
+                counter = 1;
+                int popular = sensor2Distance[0];
 
-                for (int j = 1; j < sensor2Distance.length; j++) {
-                    if (temp == sensor2Distance[j])
-                        tempCounter++;
+                for (int i = 0; i < (sensor2Distance.length - 1); i++) {
+                    temp = sensor2Distance[i];
+                    tempCounter = 0;
+
+                    if(temp > 201) sensorBack.disable();
+
+
+                    for (int j = 1; j < sensor2Distance.length; j++) {
+                        if (temp == sensor2Distance[j])
+                            tempCounter++;
+                    }
+                    if (tempCounter > counter) {
+                        popular = temp;
+                        counter = tempCounter;
+                    }
+                    sensor2Measurement = popular;
                 }
-                if (tempCounter > counter) {
-                    popular = temp;
-                    counter = tempCounter;
-                }
-                sensor2Measurement = popular;
             }
         }
 
-            if (sensor1Measurement <= sensor2Measurement) {
-                return sensor1Measurement;
-            } else {
-                return sensor2Measurement;
-            }
-        }
+        if(!sensorFront.isActive())
+            return sensor2Measurement;
 
+        if(!sensorBack.isActive())
+            return sensor1Measurement;
+
+        if (sensor1Measurement <= sensor2Measurement) {
+            return sensor1Measurement;
+        } else {
+            return sensor2Measurement;
+        }
+    }
 
 	@Override
     //The method for moving the car backward

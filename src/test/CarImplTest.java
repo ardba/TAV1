@@ -106,6 +106,17 @@ public class CarImplTest {
         Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
     }
 
+    @Test
+    public void testIsEmptyWithBrokenSensor(){
+        CarImpl car = new CarImpl(Sensor.BROKEN_SENSOR);
+        for(int i = 0; i < Math.random() * 499; i++)
+            car.moveForward();
+        car.isEmpty();
+        boolean sensorFrontActive = car.getSensor(CarImpl.SENSOR_FRONT).isActive();
+        boolean sensorBackActive = car.getSensor(CarImpl.SENSOR_BACK).isActive();
+        Assert.assertTrue("One of the sensors should be disabled", (sensorBackActive ^ sensorFrontActive));
+    }
+
 
     /**
      * Test of MoveBackward method, of class main.CarImpl.
