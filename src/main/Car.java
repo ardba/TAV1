@@ -56,7 +56,17 @@ public interface Car {
 
     public VehicleData moveBackward(); // Return type set to VehicleData due to moveBackward() TC1.
 
+	/**
+	 Description: If the car has found a parking space already, it goes to the beginning of the parking space and
+	 performs a parallel parking. If the place is not found yet it moves forward until the end of the street, if it
+	 finds space, does as described above.
+	 Pre-condition: The car is not parked.
+	 Post-condition: The car is parked or the car is at the end of the street.
+	 Test-cases:
+
+	 */
 	public void park();
+
 	/**
 	 Description: The car is set to not parked and moves to the front of the parking space where it was parked.
 	 Pre-condition: The car status is parked.

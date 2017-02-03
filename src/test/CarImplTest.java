@@ -1,8 +1,11 @@
 package test;
 
+import main.Car;
 import main.CarImpl;
 import main.VehicleData;
 import org.junit.*;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -131,9 +134,23 @@ public class CarImplTest {
      */
 
     @Test
+    public void testParkWhenParked(){
+        CarImpl car = new CarImpl();
+        Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
+    }
+
+    @Test
+    public void testParkWhenParkingSpaceAlreadyFound(){
+        CarImpl car = new CarImpl();
+        Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
+        car.whereIs().setStaticParkingSpace();
+        Assert.assertTrue("Parking space should be found", true == car.whereIs().isParkingSpaceFound());
+
+    }
+
+    @Test
     public void testParkWhenStreetIsFull() {
-        CarImpl car = new CarImpl("full");
-        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+        CarImpl car = new CarImpl("full"); // Create a car on the street which does not have free parking spaces
         car.park();
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         Assert.assertTrue("Car should be at the end of the street", 500 == car.whereIs().getPosition());
@@ -141,8 +158,7 @@ public class CarImplTest {
 
     @Test
     public void testParkWithStreatIsEmpty() {
-        CarImpl car = new CarImpl("empty");
-        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+        CarImpl car = new CarImpl("empty"); // Create a car on the street which is all empty for parking
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
         Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
@@ -150,8 +166,7 @@ public class CarImplTest {
 
     @Test
     public void testParkWithStreatOneParkingSpace() {
-        CarImpl car = new CarImpl();
-        Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
+        CarImpl car = new CarImpl(); // Create a car on a street with one parking space in random position
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
         Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);

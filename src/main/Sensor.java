@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Arrays;
+
 public class Sensor {
 
     //Create an array to demonstrate a 500m long street with 5 measurements
@@ -19,6 +21,11 @@ public class Sensor {
         }
         if (streetVariation.equals("full")){
             createStreet();
+        }
+        if (streetVariation.equals("oneStaticParkingSpace")){
+            createStreet();
+            // Create parking space at [200, 201, 202, 203, 204]
+            addStatickEmptySpace();
         }
         else {
             createStreet();
@@ -57,6 +64,12 @@ public class Sensor {
             distance[j] = -1;
         }
 
+    }
+
+    public void addStatickEmptySpace(){
+        for (int i = 1000; i < i+25; i++){
+            distance[i] = -1;
+        }
     }
 
     public int[] getDistance ( int position){
