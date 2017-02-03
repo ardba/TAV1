@@ -59,32 +59,46 @@ public class CarImplTest {
     }
 
     @Test
-    public void testIsEmptyWhenAtStartOfStreet() {
-        //Pre-condition: The car is at the beginning of the street
+    public void testIsEmptyWhenBothSensorsOutOfBounds() {
+        //Pre-condition: The car is out of the bounds of the street so that no sensor can measure distance.
+        CarImpl car = new CarImpl();
+        car.whereIs().setPosition(530);
+        boolean isOutOfBounds;
+        if (car.isEmpty() == 201) {
+            isOutOfBounds = true;
+        } else {
+            isOutOfBounds = false;
+        }
+        //Post-condition: Sensors return 201, indicating an error
+        Assert.assertTrue("The sensor returns 201 (error)", isOutOfBounds);
+    }
+    @Test
+    public void testIsEmptyWhenSensor2OutOfBounds() {
+        //Pre-condition: The car is at the beginning of the street so that only sensor1 is on the street
         CarImpl car = new CarImpl();
         car.whereIs().setPosition(0);
-        boolean isWithinTheRange;
+        boolean isWithinBounds;
         if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
-            isWithinTheRange = true;
+            isWithinBounds = true;
         } else {
-            isWithinTheRange = false;
+            isWithinBounds = false;
         }
-        //Post-condition: The sensors return a value between -1 and 200
-        Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
+        //Post-condition: The sensor1 returns a value between -1 and 200
+        Assert.assertTrue("The range is between -1 and 200", isWithinBounds);
     }
 
     @Test
-    public void testIsEmptyWhenAtEndOfStreet() {
-        //Pre-condition: The car is at the beginning of the street
+    public void testIsEmptyWhenSensor1OutOfBounds() {
+        //Pre-condition: The car is at the end of the street so that sensor1 is out of the street
         CarImpl car = new CarImpl();
-        car.whereIs().setPosition(499);
+        car.whereIs().setPosition(503);
         boolean isWithinTheRange;
         if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
             isWithinTheRange = true;
         } else {
             isWithinTheRange = false;
         }
-        //Post-condition: The sensors return a value between -1 and 200
+        //Post-condition: The sensor2 returns a value between -1 and 200
         Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
     }
 

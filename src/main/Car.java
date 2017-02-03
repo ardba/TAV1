@@ -31,8 +31,12 @@ public interface Car {
 	 Post-condition: The sensors have measured the distance to objects closest to the car's right hand side.
 	 Test-cases:
 	 TC1. Measure distance while parked. Expected output: Distance -1 (meaning empty)
-	 TC2. Measure distance while in position 0. Expected output: Distance between 0 and 200, or -1.
-	 TC3. Measure distance while in position 499. Expected output: Distance between 0 and 200.
+     TC2. Measure distance when the car is out of the bounds of the street at position 530.
+            Expected output: Sensors return 201, indicating an error.
+	 TC2. Measure distance while sensor 2 is out of the bounds of the street at position 0.
+            Expected output: Distance between 0 and 200, or -1.
+	 TC3. Measure distance while sensor 2 is out of the bounds of the street at position 503.
+            Expected output: Distance between 0 and 200.
 	 */
 	public int isEmpty();
 
