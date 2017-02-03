@@ -1,6 +1,7 @@
 package test;
 
 import main.CarImpl;
+import main.Sensor;
 import main.VehicleData;
 import org.junit.*;
 
@@ -26,7 +27,7 @@ public class CarImplTest {
     //TC2: Move forward.
     @Test
     public void testMoveCarForward() {
-        CarImpl instance = new CarImpl(); //Create car at the beginning of the street
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); //Create car at the beginning of the street
         VehicleData vehicleData;
         vehicleData = instance.moveForward(); //move the car forward
         //Expected output: Position 1.
@@ -36,7 +37,7 @@ public class CarImplTest {
     //TC3. Create car at the beginning of the street. Move car forward 500 times.
     @Test
     public void testMoveCarFurtherThanEnd(){
-        CarImpl instance = new CarImpl(); //Create car at the beginning of the street.
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); //Create car at the beginning of the street.
         VehicleData vehicleData1 = new VehicleData();
         for (int i = 0; i < 499; i++) { // Move car forward 500 times.
             vehicleData1 = instance.moveForward();
@@ -52,7 +53,7 @@ public class CarImplTest {
     @Test
     public void testIsEmptyWhileParked() {
         //Pre-condition: The car is parked
-        CarImpl car = new CarImpl();
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         car.whereIs().setParked(true);
         //Post-condition: The car returns -1 because it's parked.
         Assert.assertEquals(-1, car.isEmpty() );
@@ -61,7 +62,7 @@ public class CarImplTest {
     @Test
     public void testIsEmptyWhenBothSensorsOutOfBounds() {
         //Pre-condition: The car is out of the bounds of the street so that no sensor can measure distance.
-        CarImpl car = new CarImpl();
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         car.whereIs().setPosition(530);
         boolean isOutOfBounds;
         if (car.isEmpty() == 201) {
@@ -75,7 +76,7 @@ public class CarImplTest {
     @Test
     public void testIsEmptyWhenSensor2OutOfBounds() {
         //Pre-condition: The car is at the beginning of the street so that only sensor1 is on the street
-        CarImpl car = new CarImpl();
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         car.whereIs().setPosition(0);
         boolean isWithinBounds;
         if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
@@ -90,7 +91,7 @@ public class CarImplTest {
     @Test
     public void testIsEmptyWhenSensor1OutOfBounds() {
         //Pre-condition: The car is at the end of the street so that sensor1 is out of the street
-        CarImpl car = new CarImpl();
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         car.whereIs().setPosition(503);
         boolean isWithinTheRange;
         if (car.isEmpty() <= 200 && car.isEmpty() >= -1) {
@@ -102,6 +103,7 @@ public class CarImplTest {
         Assert.assertTrue("The range is between -1 and 200", isWithinTheRange);
     }
 
+
     /**
      * Test of MoveBackward method, of class main.CarImpl.
      */
@@ -109,7 +111,7 @@ public class CarImplTest {
     @Test
     public void testMoveBackward() {
         //Pre-condition: The car is at the end of the street.
-        CarImpl instance = new CarImpl(); // Create car at the beginning of the street.
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); // Create car at the beginning of the street.
         for (int i = 0; i <= 498; i++){ //Move car forward 499 times.
             instance.moveForward();
         }
@@ -120,7 +122,7 @@ public class CarImplTest {
     //TC2: If the car is on the  beginning of the street, it can not move backward.
     @Test
     public void testMoveBackwardFromBeginningOfTheStreet(){
-        CarImpl instance = new CarImpl(); // Create car at the beginning of the street.
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); // Create car at the beginning of the street.
         VehicleData vehicleData = new VehicleData(); //save result in this
         instance.moveBackward(); //The car moves backward.
         assertEquals(0, vehicleData.getPosition()); // Expected output: Position 0.
@@ -132,7 +134,7 @@ public class CarImplTest {
 
     @Test
     public void testParkWhenStreetIsFull() {
-        CarImpl car = new CarImpl("full");
+        CarImpl car = new CarImpl(Sensor.STREET_FULL);
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         car.park();
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
@@ -141,7 +143,7 @@ public class CarImplTest {
 
     @Test
     public void testParkWithStreatIsEmpty() {
-        CarImpl car = new CarImpl("empty");
+        CarImpl car = new CarImpl(Sensor.STREET_EMPTY);
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
@@ -150,7 +152,7 @@ public class CarImplTest {
 
     @Test
     public void testParkWithStreatOneParkingSpace() {
-        CarImpl car = new CarImpl();
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         Assert.assertTrue("Car should be at the beginning of the street", 0 == car.whereIs().getPosition());
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
@@ -163,7 +165,7 @@ public class CarImplTest {
     @Test
     public void testUnParkWhenCarIsNotParked() {
      //   System.out.println("UnPark");
-        CarImpl instance = new CarImpl();
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM);
         int randomPos =(int) Math.random()*495; //A random position on the street
         instance.whereIs().setPosition(randomPos); //moves the car to the random position
         instance.whereIs().setParked(false); //makes sure the car is parked (redundant)
@@ -182,7 +184,7 @@ public class CarImplTest {
     @Test
     public void testUnParkWhenCarIsParked() {
         //   System.out.println("UnPark");
-        CarImpl instance = new CarImpl();
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM);
         instance.whereIs().setParked(true); //makes the car parked to begin with
         int randomPos =(int) Math.random()*495; //creates a random valid parking spot
         instance.whereIs().setPosition(randomPos); //moves the car to the parking spot
@@ -204,7 +206,7 @@ public class CarImplTest {
     @Test
     public void testWhereIs() {
        // System.out.println("WhereIs");
-        CarImpl instance = new CarImpl();
+        CarImpl instance = new CarImpl(Sensor.STREET_RANDOM);
         VehicleData vehicleData = new VehicleData();
         Assert.assertTrue(vehicleData.equals(instance.whereIs()));
     }
