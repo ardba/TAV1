@@ -7,7 +7,7 @@ public class Sensor {
     //Create an array to demonstrate a 500m long street with 5 measurements
     //for each meter.
     private int[] distance = new int[2500];
-    boolean isActive ;
+    private boolean isActive ;
     int mistakesCounter;
     public final static int STREET_RANDOM = 0; //Creates a street with a randomly placed parking spot
     public final static int STREET_EMPTY = 1;  //Creates a street that contains only empty space
@@ -105,4 +105,13 @@ public class Sensor {
         }
         return distance;
     }
+
+    public void disable(){
+        this.isActive = false;
+    }
+
+    public boolean isActive(){
+        return this.isActive;
+    }
+
 }

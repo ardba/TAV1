@@ -61,9 +61,9 @@ public class CarImpl implements Car {
             vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
 
 
-	}
+	    }
             return vehicleData;
-        }
+    }
 
 	@Override
 	public int isEmpty() {
