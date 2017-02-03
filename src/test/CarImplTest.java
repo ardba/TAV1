@@ -38,7 +38,7 @@ public class CarImplTest {
     public void testMoveCarFurtherThanEnd(){
         CarImpl instance = new CarImpl(); //Create car at the beginning of the street.
         VehicleData vehicleData1 = new VehicleData();
-        for (int i = 0; i <= 499; i++) { // Move car forward 500 times.
+        for (int i = 0; i < 499; i++) { // Move car forward 500 times.
             vehicleData1 = instance.moveForward();
         }
         //Expected output: Position 499.
