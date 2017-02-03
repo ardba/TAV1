@@ -164,8 +164,8 @@ public class CarImplTest {
         Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
     }
 
-    @Test
-    public void testParkWithStreetOneParkingSpace() { //TC4.3
+    @Test //TC4.3
+    public void testParkWithStreetOneParkingSpace() {
         CarImpl car = new CarImpl(Sensor.STREET_RANDOM); // Create a car on a street with one parking space in random position
         Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
         car.park();
@@ -174,8 +174,8 @@ public class CarImplTest {
         Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
     }
 
-    @Test
-    public void testParkWhenStreetIsFull() { //TC.4.4
+    @Test //TC.4.4
+    public void testParkWhenStreetIsFull() {
         CarImpl car = new CarImpl(Sensor.STREET_FULL); // Create a car on the street which does not have free parking spaces
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         car.park();
@@ -183,8 +183,8 @@ public class CarImplTest {
         Assert.assertTrue("Car should be at the end of the street", 499 == car.whereIs().getPosition());
     }
 
-    @Test
-    public void testParkWithStreetIsEmpty() { //TC.4.5
+    @Test //TC.4.5
+    public void testParkWithStreetIsEmpty() {
         int[] expectedParkingSpace = {0, 1, 2, 3, 4};
         CarImpl car = new CarImpl(Sensor.STREET_EMPTY); // Create a car on the street which is all empty for parking
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
