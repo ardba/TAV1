@@ -31,6 +31,10 @@ public class CarImpl implements Car {
                     sensorBack = new Sensor(Sensor.BROKEN_SENSOR);
                 }
                 break;
+            case Sensor.STREET_STATIC_PARKING_PLACE:
+                sensorFront = new Sensor(Sensor.STREET_STATIC_PARKING_PLACE);
+                sensorBack = new Sensor(sensorFront);
+                break;
             default:
                 sensorFront = new Sensor(Sensor.STREET_RANDOM);
                 sensorBack = new Sensor(sensorFront);
