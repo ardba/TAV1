@@ -42,8 +42,11 @@ public class Sensor {
         }
 
         //Add noise to the measurements
-        for (int i = 0; i < 2500; i += Math.random() * 5 + 1) {
+        for (int i = 0; i < 2500; i += Math.random() * 5 + 3) {
             distance[i] += Math.random() * 200 + 1;
+            if (distance[i] > 200) {
+                distance[i] = 200;
+            }
         }
     }
 
