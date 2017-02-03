@@ -13,6 +13,7 @@ public class VehicleData{
         isParked = false;
         parkingSpaceFound = false;
         freeSpace = new boolean[500];
+        parkingSpace = new int[5];
     }
 
     public int getPosition() {
@@ -55,13 +56,10 @@ public class VehicleData{
     }
 
     public void setParkingSpace(){
-        if (position > 4 && position < 500){
-
-            for (int i = 0; i < freeSpace.length; i++){
-                if (freeSpace[i] && freeSpace[i-1] && freeSpace[i-2] && freeSpace[i-3] && freeSpace[i-4]){
-                    parkingSpace = new int[]{i-4, i-3, i-2, i-1, i};
-                    parkingSpaceFound = true;
-                }
+        for (int i = 4; i < freeSpace.length; i++){
+            if (freeSpace[i] && freeSpace[i-1] && freeSpace[i-2] && freeSpace[i-3] && freeSpace[i-4]){
+                parkingSpace = new int[]{i-4, i-3, i-2, i-1, i};
+                parkingSpaceFound = true;
             }
         }
     }

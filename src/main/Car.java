@@ -63,7 +63,18 @@ public interface Car {
 	 Pre-condition: The car is not parked.
 	 Post-condition: The car is parked or the car is at the end of the street.
 	 Test-cases:
-
+	 TC4.1: testParkWhenParked(): If car is parked, it can not execute park();
+	 TC4.2: testParkWhenParkingSpaceAlreadyFound(): Even though not realistic, but according to the method description
+	 if a car has already found a parking space but is somewhere ahead of it, it goes back until the beginning of a
+	 parking space and then parks;
+	 TC4.3: testParkWithStreetOneParkingSpace(): When a car is on a street and this method is executed, car should
+	 go along the street and search for a parking space, when found, stop at the beginning of the parking space and
+	 park;
+	 TC4.4: testParkWhenStreetIsFull(): When a car is on a street and this method is executed, car should
+	 go along the street and search for a parking space if no space found it should go to the end of a stret;
+	 TC4.5: testParkWithStreetIsEmpty(): When a car is on a street and this method is executed, car should
+	 go along the street and search for a parking space, if street is empty it should park at the first available
+	 parking space;
 	 */
 	public void park();
 

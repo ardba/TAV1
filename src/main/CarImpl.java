@@ -59,21 +59,16 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car forward
-    //The method for moving the car forward
     public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC2.
         if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC3.
 
-            // testing
-                if (isEmpty() == -1){
-                    vehicleData.setFreeSpace(vehicleData.getPosition(), true);
-                }
-                else {
-                    vehicleData.setFreeSpace(vehicleData.getPosition(), false);
-                }
-
+            if (isEmpty() == -1){
+                vehicleData.setFreeSpace(vehicleData.getPosition(), true);
+            }
+            else {
+                vehicleData.setFreeSpace(vehicleData.getPosition(), false);
+            }
             vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
-
-
 	    }
             return vehicleData;
     }
@@ -174,17 +169,24 @@ public class CarImpl implements Car {
 
 	@Override
 	public void park() {
-		if (vehicleData.getPosition() < 500) {
 
-			while (vehicleData.getPosition() < 500) {
-				moveForward();
-				if (vehicleData.isParkingSpaceFound()) {
-					parallelPark();
-                    break;
-				}
-			}
-
-		}
+        if (!vehicleData.isParked()) { // Car should not be parked (TC4.1)
+            if (vehicleData.isParkingSpaceFound() && vehicleData.getPosition() > vehicleData.getParkingSpace()[4]){ //Car already knows where parking space and it is past it (TC4.2)
+                while (vehicleData.getPosition() > vehicleData.getParkingSpace()[4]+1) {
+                    moveBackward(); // Move car backwards untill it reaches the parking space (TC4.2)
+                }
+                parallelPark();
+            }
+            else {
+                while (vehicleData.getPosition() < 499){ // If no parking space found, car should go to the end of street (TC4.4)
+                    moveForward();
+                    if (vehicleData.isParkingSpaceFound()) { // Car moves till the end of street until it finds a parking space (TC4.3, TC4.5)
+                        parallelPark();
+                        break;
+                    }
+                }
+            }
+        }
 	}
 
 	@Override

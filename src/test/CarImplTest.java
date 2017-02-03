@@ -1,6 +1,5 @@
 package test;
 
-import main.Car;
 import main.CarImpl;
 import main.Sensor;
 import main.VehicleData;
@@ -146,44 +145,56 @@ public class CarImplTest {
      * Test of Park method, of class main.CarImpl.
      */
 
-    @Test
+    @Test // TC4.1
     public void testParkWhenParked(){
         CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
     }
 
-    @Test
+    @Test //TC4.2
     public void testParkWhenParkingSpaceAlreadyFound(){
         CarImpl car = new CarImpl(Sensor.STREET_RANDOM);
         Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
-        car.whereIs().setStaticParkingSpace();
+        car.whereIs().setStaticParkingSpace(); // Manually inject a parking space in vehicleDate as if it was found
         Assert.assertTrue("Parking space should be found", true == car.whereIs().isParkingSpaceFound());
-
+        car.whereIs().setPosition((int)(Math.random() * (499 - 206)) + 206); // Manually place the car somewhere after the parking space
+        Assert.assertTrue("Car should be on the street and not before a parking space", true == (car.whereIs().getPosition() > 205 && car.whereIs().getPosition() < 499));
+        car.park();
+        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
+        Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
     }
 
     @Test
-    public void testParkWhenStreetIsFull() {
+    public void testParkWithStreetOneParkingSpace() { //TC4.3
+        CarImpl car = new CarImpl(Sensor.STREET_RANDOM); // Create a car on a street with one parking space in random position
+        Assert.assertTrue("Car should not be parked", true == !car.whereIs().isParked());
+        car.park();
+        Assert.assertTrue("Car should find a parking space", car.whereIs().isParkingSpaceFound());
+        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
+        Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
+    }
+
+    @Test
+    public void testParkWhenStreetIsFull() { //TC.4.4
         CarImpl car = new CarImpl(Sensor.STREET_FULL); // Create a car on the street which does not have free parking spaces
+        Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         car.park();
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
-        Assert.assertTrue("Car should be at the end of the street", 500 == car.whereIs().getPosition());
+        Assert.assertTrue("Car should be at the end of the street", 499 == car.whereIs().getPosition());
     }
 
     @Test
-    public void testParkWithStreetIsEmpty() {
+    public void testParkWithStreetIsEmpty() { //TC.4.5
+        int[] expectedParkingSpace = {0, 1, 2, 3, 4};
         CarImpl car = new CarImpl(Sensor.STREET_EMPTY); // Create a car on the street which is all empty for parking
+        Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
         Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
+        Assert.assertArrayEquals(car.whereIs().getParkingSpace(), expectedParkingSpace); // Car should be parked in the first available space
     }
 
-    @Test
-    public void testParkWithStreetOneParkingSpace() {
-        CarImpl car = new CarImpl(Sensor.STREET_RANDOM); // Create a car on a street with one parking space in random position
-        car.park();
-        Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
-        Assert.assertTrue("Car should be in the parking space", car.whereIs().getPosition() == car.whereIs().getParkingSpace()[0]);
-    }
+
 
     /**
      * Test of UnPark method, of class main.CarImpl.
