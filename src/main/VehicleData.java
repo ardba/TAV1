@@ -4,7 +4,7 @@ public class VehicleData{
     
     private int position;
     private boolean isParked;
-    private boolean[] freeSpace;
+    public boolean[] freeSpace;
     private boolean parkingSpaceFound;
     private int[] parkingSpace;
 
@@ -64,6 +64,16 @@ public class VehicleData{
                 }
             }
         }
+    }
+
+    public void setStaticParkingSpace(){
+        int counter = 0;
+        parkingSpace = new int[5];
+        for (int i = 200; i < 205; i++){
+            parkingSpace[counter] = i;
+            counter++;
+        }
+        parkingSpaceFound = true;
     }
 
 }
