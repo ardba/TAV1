@@ -152,14 +152,14 @@ public class CarImplTest {
 
     @Test
     public void testParkWhenStreetIsFull() {
-        CarImpl car = new CarImpl(Sensor.STREET_RANDOM); // Create a car on the street which does not have free parking spaces
+        CarImpl car = new CarImpl(Sensor.STREET_FULL); // Create a car on the street which does not have free parking spaces
         car.park();
         Assert.assertTrue("Car should not be parked", false == car.whereIs().isParked());
         Assert.assertTrue("Car should be at the end of the street", 500 == car.whereIs().getPosition());
     }
 
     @Test
-    public void testParkWithStreatIsEmpty() {
+    public void testParkWithStreetIsEmpty() {
         CarImpl car = new CarImpl(Sensor.STREET_EMPTY); // Create a car on the street which is all empty for parking
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
@@ -167,7 +167,7 @@ public class CarImplTest {
     }
 
     @Test
-    public void testParkWithStreatOneParkingSpace() {
+    public void testParkWithStreetOneParkingSpace() {
         CarImpl car = new CarImpl(Sensor.STREET_RANDOM); // Create a car on a street with one parking space in random position
         car.park();
         Assert.assertTrue("Car should be parked", true == car.whereIs().isParked());
