@@ -42,7 +42,7 @@ public interface Car {
 
     /**
      Description: The car moves 1m backward. If the car is on the  beginning of the street, it can not move backward.
-     Pre-condition: The car is not on the beginning of the street.
+     Pre-condition: The car is on the street.
      Post-condition: Post-condition: The car is moved 1 position backward.
 
      Test-cases:

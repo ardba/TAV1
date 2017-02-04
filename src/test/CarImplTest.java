@@ -18,15 +18,7 @@ public class CarImplTest {
      * Test of MoveForward method, of class main.CarImpl.
      */
 
-    //  TC1. Create car at the beginning of the street. .
-    @Test
-    public void testTheCarIsAtTheBeginningOfTheStreet()
-    {
-        VehicleData vehicleData = new VehicleData();   // Create car at the beginning of the street.
-        //Expected output: Position 0.
-        assertEquals(0, vehicleData.getPosition()); //Test if expected position is 0.
-    }
-    //TC2: Move forward.
+    //TC 1.1: Move forward.
     @Test
     public void testMoveCarForward() {
         CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); //Create car at the beginning of the street
@@ -36,7 +28,7 @@ public class CarImplTest {
         assertEquals(1, vehicleData.getPosition());
     }
 
-    //TC3. Create car at the beginning of the street. Move car forward 500 times.
+    //TC 1.2. Create car at the beginning of the street. Move car forward 500 times.
     @Test
     public void testMoveCarFurtherThanEnd(){
         CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); //Create car at the beginning of the street.
@@ -120,7 +112,7 @@ public class CarImplTest {
     /**
      * Test of MoveBackward method, of class main.CarImpl.
      */
-    //TC1. The car moves 1m backward.
+    //TC 3.1. The car moves 1m backward.
     @Test
     public void testMoveBackward() {
         //Pre-condition: The car is at the end of the street.
@@ -132,7 +124,7 @@ public class CarImplTest {
         vehicleData = instance.moveBackward();
         assertEquals(498, vehicleData.getPosition()); //Expected output: Car is on position 498.
     }
-    //TC2: If the car is on the  beginning of the street, it can not move backward.
+    //TC 3.2 : If the car is on the  beginning of the street, it can not move backward.
     @Test
     public void testMoveBackwardFromBeginningOfTheStreet(){
         CarImpl instance = new CarImpl(Sensor.STREET_RANDOM); // Create car at the beginning of the street.
