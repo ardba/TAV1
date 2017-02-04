@@ -10,13 +10,10 @@ public interface Car {
      Post-condition: The car is at the end of the street.
 
      Test-cases:
-     TC1.
-     Requirement: None. This is a base case interpreted by the team to get a starting point for further testing.
-     Test: Create car at the beginning of the street. Expected output: Position 0.
-     TC2.
+     TC 1.3.
      Requirement: This method moves the car 1 meter forward.
      Test: Create car at the beginning of the street. Move forward. Expected output: Position 1.
-     TC3.
+     TC 1.2.
      Requirement: The car cannot be moved forward beyond the end of the street.
      Test: Create car at the beginning of the street. Move car forward 500 times. Expected output: Position 499.
      */
@@ -48,10 +45,10 @@ public interface Car {
      Post-condition: Post-condition: The car is moved 1 position backward.
 
      Test-cases:
-     TC1:
+     TC 3.1:
      Requirement: The car moves 1m backward.
      Test:  Create car at the beginning of the street. Move car forward 499 times. Move car backward .Expected output: Car is on position 498.
-     TC2:
+     TC 3.2:
      Requirement: If the car is on the  beginning of the street, it can not move backward.
      Test: Create car at the beginning of the street. The car moves backward. Expected output: Position 0.
      */

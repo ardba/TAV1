@@ -59,8 +59,8 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car forward
-    public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC2.
-        if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC3.
+    public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC1.1.
+        if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC 1.2.
 
             if (isEmpty() == -1){
                 vehicleData.setFreeSpace(vehicleData.getPosition(), true);
@@ -68,7 +68,7 @@ public class CarImpl implements Car {
             else {
                 vehicleData.setFreeSpace(vehicleData.getPosition(), false);
             }
-            vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC2.
+            vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC1.1.
 	    }
             return vehicleData;
     }
@@ -165,9 +165,9 @@ public class CarImpl implements Car {
 
 	@Override
     //The method for moving the car backward
-    public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC1.
-        if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC2.
-            vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC1.
+    public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC3.1.
+        if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC 3.2.
+            vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC3.1.
         }
         return vehicleData;
     }
