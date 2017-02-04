@@ -23,8 +23,8 @@ public class CarImpl implements Car {
     public CarImpl(int streetVariation){
         vehicleData = new VehicleData();
         switch (streetVariation) {
-            case Sensor.STREET_RANDOM:
-                sensorFront = new Sensor(Sensor.STREET_RANDOM);
+            case Sensor.STREET_DEFAULT:
+                sensorFront = new Sensor(Sensor.STREET_DEFAULT);
                 sensorBack = new Sensor(sensorFront);
                 break;
             case Sensor.STREET_EMPTY:
@@ -38,9 +38,9 @@ public class CarImpl implements Car {
             case Sensor.BROKEN_SENSOR:
                 if(Math.random() > 0.5){
                     sensorFront = new Sensor(Sensor.BROKEN_SENSOR);
-                    sensorBack = new Sensor(Sensor.STREET_RANDOM);
+                    sensorBack = new Sensor(Sensor.STREET_DEFAULT);
                 }else{
-                    sensorFront = new Sensor(Sensor.STREET_RANDOM);
+                    sensorFront = new Sensor(Sensor.STREET_DEFAULT);
                     sensorBack = new Sensor(Sensor.BROKEN_SENSOR);
                 }
                 break;
@@ -49,7 +49,7 @@ public class CarImpl implements Car {
                 sensorBack = new Sensor(sensorFront);
                 break;
             default:
-                sensorFront = new Sensor(Sensor.STREET_RANDOM);
+                sensorFront = new Sensor(Sensor.STREET_DEFAULT);
                 sensorBack = new Sensor(sensorFront);
                 break;
         }
@@ -78,40 +78,41 @@ public class CarImpl implements Car {
         int counter = 1, tempCounter;
         int temp;
 
-        //If car is parked return empty
+        //If car is parked return -1
         if (vehicleData.isParked()) {
             return -1;
         }
 
 
-        int sensor1Pos = vehicleData.getPosition();
-        int sensor2Pos = sensor1Pos - 5;
-        int sensor1Measurement = 201, sensor2Measurement = 201;
+        int sensorFrontPos = vehicleData.getPosition();
+        int sensorBackPos = sensorFrontPos - 5;
+        int sensorFrontMeasurement = 201, sensorBackMeasurement = 201;
 
 
-        if (sensorFront.isActive()) {
-            if (sensor1Pos < 500 && sensor1Pos >= 0) {
+        if (sensorFront.isActive()) {               //If the front sensor has been working properly
+            if (sensorFrontPos < 500 && sensorFrontPos >= 0) {
                 //Loop the 5 measurements and get rid of the noise by choosing the value
                 //that shows up the most times.
-                int[] sensor1Distance = sensorFront.getDistance(sensor1Pos);
-                int popular = sensor1Distance[0];
+                int[] sensorFrontDistance = sensorFront.getDistance(sensorFrontPos);
+                int popular = sensorFrontDistance[0];
 
 
-                for (int i = 0; i < (sensor1Distance.length - 1); i++) {
-                    temp = sensor1Distance[i];
+                for (int i = 0; i < (sensorFrontDistance.length - 1); i++) {
+                    temp = sensorFrontDistance[i];
                     tempCounter = 0;
 
+                    //Broken sensor test case: If the sensor gives unreasonable data, disable it.
                     if(temp > 201) sensorFront.disable();
 
-                    for (int j = 1; j < sensor1Distance.length; j++) {
-                        if (temp == sensor1Distance[j])
+                    for (int j = 1; j < sensorFrontDistance.length; j++) {
+                        if (temp == sensorFrontDistance[j])
                             tempCounter++;
                     }
                     if (tempCounter > counter) {
                         popular = temp;
                         counter = tempCounter;
                     }
-                    sensor1Measurement = popular;
+                    sensorFrontMeasurement = popular;
                 }
             }
         }
@@ -119,41 +120,46 @@ public class CarImpl implements Car {
 
         if (sensorBack.isActive()) {
             //If sensor 2 is in the range of the street, between 0 & 500
-            if (sensor2Pos >= 0 && sensor2Pos < 500) {
-                int[] sensor2Distance = sensorBack.getDistance(sensor2Pos);
+            if (sensorBackPos >= 0 && sensorBackPos < 500) {
+                int[] sensorBackDistance = sensorBack.getDistance(sensorBackPos);
                 counter = 1;
-                int popular = sensor2Distance[0];
+                int popular = sensorBackDistance[0];
 
-                for (int i = 0; i < (sensor2Distance.length - 1); i++) {
-                    temp = sensor2Distance[i];
+                //The following loop contains the necessary logic to filter out the noise created by the sensors
+                //It works by filtering out the most common measurement out of an array[5] representing
+                //the five measurements the sensor makes for a specific meter.
+
+                for (int i = 0; i < (sensorBackDistance.length - 1); i++) {
+                    temp = sensorBackDistance[i];
                     tempCounter = 0;
 
-                    if(temp > 201) sensorBack.disable();
+                    if(temp > 201) sensorBack.disable(); //If the sensor gives unreasonable data, disable it.
 
-
-                    for (int j = 1; j < sensor2Distance.length; j++) {
-                        if (temp == sensor2Distance[j])
+                    for (int j = 1; j < sensorBackDistance.length; j++) {
+                        if (temp == sensorBackDistance[j])
                             tempCounter++;
                     }
                     if (tempCounter > counter) {
                         popular = temp;
                         counter = tempCounter;
                     }
-                    sensor2Measurement = popular;
+                    sensorBackMeasurement = popular;
                 }
             }
         }
 
-        if(!sensorFront.isActive())
-            return sensor2Measurement;
+        if(!sensorFront.isActive())         //If front sensor is broken
+            return sensorBackMeasurement;      //Return measurements of back sensor
 
-        if(!sensorBack.isActive())
-            return sensor1Measurement;
+        if(!sensorBack.isActive())          //If back sensor is broken
+            return sensorFrontMeasurement;      //Return measurements of front sensor
 
-        if (sensor1Measurement <= sensor2Measurement) {
-            return sensor1Measurement;
+
+        //Returns the nearest distance recorded by either one of the sensors
+        if (sensorFrontMeasurement <= sensorBackMeasurement) {
+            return sensorFrontMeasurement;
         } else {
-            return sensor2Measurement;
+            return sensorBackMeasurement;
         }
     }
 
