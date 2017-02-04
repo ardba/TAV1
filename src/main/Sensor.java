@@ -8,7 +8,6 @@ public class Sensor {
     //for each meter.
     private int[] distance = new int[2500];
     private boolean isActive ;
-    int mistakesCounter;
     public final static int STREET_DEFAULT = 0; //Creates a street with a randomly placed parking spot
     public final static int STREET_EMPTY = 1;  //Creates a street that contains only empty space
     public final static int STREET_FULL = 2;   //Creates a street that contains no parking space
@@ -19,12 +18,10 @@ public class Sensor {
     public Sensor(Sensor sensor){
         this.distance = sensor.distance;
         this.isActive = sensor.isActive;
-        this.mistakesCounter = sensor.mistakesCounter;
     }
 
     public Sensor(int streetVariation){
         this.isActive = true;
-        this.mistakesCounter = 0;
         switch (streetVariation){
             case STREET_DEFAULT:
                 createStreet();
