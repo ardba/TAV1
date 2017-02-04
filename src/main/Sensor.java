@@ -47,7 +47,7 @@ public class Sensor {
             case STREET_STATIC_PARKING_PLACE:
                 createStreet();
                 //Create parking space at [200,201,202,203,204]
-                addStatickEmptySpace();
+                addStaticEmptySpace();
                 break;
 
             default:
@@ -93,7 +93,7 @@ public class Sensor {
 
     }
 
-    public void addStatickEmptySpace(){
+    public void addStaticEmptySpace(){
         for (int i = 1000; i < i+25; i++){
             distance[i] = -1;
         }
