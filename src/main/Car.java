@@ -37,6 +37,8 @@ public interface Car {
             Expected output: Distance between 0 and 200, or -1.
 	 TC3. Measure distance while sensor 1 is out of the bounds of the street at position 503.
             Expected output: Distance between 0 and 200.
+	 TC4. Measure distance while one of the two sensors returns faulty information.
+	 		Expected output: The faulty sensor is identified and disabled.
 	 */
 	public int isEmpty();
 
@@ -90,8 +92,8 @@ public interface Car {
 
 	/**
 	 Description: Returns the car's vehicle data, containing its location and parking status.
-	 Pre-condition: -
-	 Post-condition: -
+	 Pre-condition: The car is initialized
+	 Post-condition: vehicleData containing location and distance is returned
 	 Test-cases:
 	 testWhereIs: Expected output: The car's vehicle data.
 	 */
