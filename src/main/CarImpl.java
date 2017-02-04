@@ -179,7 +179,7 @@ public class CarImpl implements Car {
         if (!vehicleData.isParked()) { // Car should not be parked (TC4.1)
             if (vehicleData.isParkingSpaceFound() && vehicleData.getPosition() > vehicleData.getParkingSpace()[4]){ //Car already knows where parking space and it is past it (TC4.2)
                 while (vehicleData.getPosition() > vehicleData.getParkingSpace()[4]+1) {
-                    moveBackward(); // Move car backwards untill it reaches the parking space (TC4.2)
+                    moveBackward(); // Move car backwards until it reaches the parking space (TC4.2)
                 }
                 parallelPark();
             }
@@ -187,7 +187,7 @@ public class CarImpl implements Car {
                 while (vehicleData.getPosition() < 499){ // If no parking space found, car should go to the end of street (TC4.4)
                     moveForward();
                     if (vehicleData.isParkingSpaceFound()) { // Car moves till the end of street until it finds a parking space (TC4.3, TC4.5)
-                        parallelPark();
+                        park();
                         break;
                     }
                 }
