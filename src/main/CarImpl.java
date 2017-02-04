@@ -183,7 +183,7 @@ public class CarImpl implements Car {
                 }
                 parallelPark();
             }
-            else {
+            else { // If parking space not found yet, car has to move forward and search for it (TC4.3)
                 while (vehicleData.getPosition() < 499){ // If no parking space found, car should go to the end of street (TC4.4)
                     moveForward();
                     if (vehicleData.isParkingSpaceFound()) { // Car moves till the end of street until it finds a parking space (TC4.3, TC4.5)
