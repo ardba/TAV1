@@ -4,12 +4,12 @@ package main;
 public class CarImpl implements Car {
 
     private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
-	private Sensor sensorFront;
-	private Sensor sensorBack;
+	private SensorImpl sensorFront;
+	private SensorImpl sensorBack;
     public static final int SENSOR_FRONT = 0;
     public static final int SENSOR_BACK = 1;
 
-	public Sensor getSensor(int sensor){
+	public SensorImpl getSensor(int sensor){
 	    switch (sensor){
             case SENSOR_FRONT:
                 return sensorFront;
@@ -23,34 +23,34 @@ public class CarImpl implements Car {
     public CarImpl(int streetVariation){
         vehicleData = new VehicleData();
         switch (streetVariation) {
-            case Sensor.STREET_DEFAULT:
-                sensorFront = new Sensor(Sensor.STREET_DEFAULT);
-                sensorBack = new Sensor(sensorFront);
+            case SensorImpl.STREET_DEFAULT:
+                sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
+                sensorBack = new SensorImpl(sensorFront);
                 break;
-            case Sensor.STREET_EMPTY:
-                sensorFront = new Sensor(Sensor.STREET_EMPTY);
-                sensorBack = new Sensor(sensorFront);
+            case SensorImpl.STREET_EMPTY:
+                sensorFront = new SensorImpl(SensorImpl.STREET_EMPTY);
+                sensorBack = new SensorImpl(sensorFront);
                 break;
-            case Sensor.STREET_FULL:
-                sensorFront = new Sensor(Sensor.STREET_FULL);
-                sensorBack = new Sensor(sensorFront);
+            case SensorImpl.STREET_FULL:
+                sensorFront = new SensorImpl(SensorImpl.STREET_FULL);
+                sensorBack = new SensorImpl(sensorFront);
                 break;
-            case Sensor.BROKEN_SENSOR:
+            case SensorImpl.BROKEN_SENSOR:
                 if(Math.random() > 0.5){
-                    sensorFront = new Sensor(Sensor.BROKEN_SENSOR);
-                    sensorBack = new Sensor(Sensor.STREET_DEFAULT);
+                    sensorFront = new SensorImpl(SensorImpl.BROKEN_SENSOR);
+                    sensorBack = new SensorImpl(SensorImpl.STREET_DEFAULT);
                 }else{
-                    sensorFront = new Sensor(Sensor.STREET_DEFAULT);
-                    sensorBack = new Sensor(Sensor.BROKEN_SENSOR);
+                    sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
+                    sensorBack = new SensorImpl(SensorImpl.BROKEN_SENSOR);
                 }
                 break;
-            case Sensor.STREET_STATIC_PARKING_PLACE:
-                sensorFront = new Sensor(Sensor.STREET_STATIC_PARKING_PLACE);
-                sensorBack = new Sensor(sensorFront);
+            case SensorImpl.STREET_STATIC_PARKING_PLACE:
+                sensorFront = new SensorImpl(SensorImpl.STREET_STATIC_PARKING_PLACE);
+                sensorBack = new SensorImpl(sensorFront);
                 break;
             default:
-                sensorFront = new Sensor(Sensor.STREET_DEFAULT);
-                sensorBack = new Sensor(sensorFront);
+                sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
+                sensorBack = new SensorImpl(sensorFront);
                 break;
         }
 
