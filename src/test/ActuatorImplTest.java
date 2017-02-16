@@ -1,3 +1,4 @@
+/*
 package test;
 
 import main.ActuatorImpl;
@@ -14,17 +15,21 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+*/
 /**
  * Created by sanja on 2017-02-15.
- */
+ *//*
+
 @RunWith(MockitoJUnitRunner.class)
 public class ActuatorImplTest {
     CarImpl car = mock(CarImpl.class);
     VehicleData vehicleData = mock(VehicleData.class);
     ActuatorImpl instance;
-    /**
+    */
+/**
      * Test of MoveForward method, of class main.ActuatorImpl.
-     */
+     *//*
+
     //TC 1.1. Car is at the beginning of the street. Move forward. Expected output: Car moves 1.
 
     @Before
@@ -41,8 +46,10 @@ public class ActuatorImplTest {
         assertEquals(1, result);
     }
 
+*/
 /*    TC 1.2.
-    Car is at the end of the street. Move forward. Expected output: Car moves 0.*/
+    Car is at the end of the street. Move forward. Expected output: Car moves 0.*//*
+
 
     @Test
     public void testCarMovedForwardAtTheEndOfTheStreet_Mockito(){
@@ -56,3 +63,4 @@ public class ActuatorImplTest {
     }
 
 }
+*/

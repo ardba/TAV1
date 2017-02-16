@@ -12,9 +12,6 @@ public class CarImplTest {
     public CarImplTest() {
     }
 
-    /**
-     * Test of MoveForward method, of class main.CarImpl.
-     */
 
     //TC 1.1: Move forward.
     @Test
@@ -41,9 +38,8 @@ public class CarImplTest {
     }
 
 
-    /**
-     * Test of isEmpty method, of class main.CarImpl.
-     */
+
+
     @Test
     public void testIsEmptyWhileParked() {
         //Pre-condition: The car is parked
@@ -109,9 +105,6 @@ public class CarImplTest {
     }
 
 
-    /**
-     * Test of MoveBackward method, of class main.CarImpl.
-     */
     //TC 3.1. The car moves 1m backward.
     @Test
     public void testMoveBackward() {
@@ -132,10 +125,6 @@ public class CarImplTest {
         instance.moveBackward(); //The car moves backward.
         assertEquals(0, vehicleData.getPosition()); // Expected output: Position 0.
     }
-
-    /**
-     * Test of Park method, of class main.CarImpl.
-     */
 
     @Test // TC4.1
     public void testParkWhenParked(){
@@ -187,9 +176,6 @@ public class CarImplTest {
     }
 
 
-    /**
-     * Test of UnPark method, of class main.CarImpl.
-     */
     @Test
     public void testUnParkWhenCarIsNotParked() {
      //   System.out.println("UnPark");
@@ -205,8 +191,7 @@ public class CarImplTest {
 
         Assert.assertTrue("Car should have the same position and status as before",
                 instance.whereIs().equals(vehicleData));
-        /*Compare both vehicle data, the car should
-        have the same position and parked status as before since it isn't supposed to change.*/
+
     }
 
     @Test
@@ -224,13 +209,11 @@ public class CarImplTest {
         Assert.assertTrue("Car should have changed its position and status",
                 instance.whereIs().equals(vehicleData));
 
-        /*Compare both vehicle data, the car should
-        have the same position and parked status as before since it isn't supposed to change.*/
+
 
         }
-    /**
-     * Test of WhereIs method, of class main.CarImpl.
-     */
+
+
     @Test
     public void testWhereIs() {
        // System.out.println("WhereIs");

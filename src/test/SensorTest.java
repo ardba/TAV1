@@ -1,3 +1,4 @@
+/*
 package test;
 
 import main.Car;
@@ -60,6 +61,7 @@ public class SensorTest {
 
     }
 
+*/
 /*
     @Test
     public void testBrokenSensor(){
@@ -73,7 +75,8 @@ public class SensorTest {
         }
 
     }
-*/
+*//*
+
 
     public int getMostPopular(int[] array){
         int temp, tempCounter, popular, counter = 1, measurement = 0;
@@ -96,3 +99,4 @@ public class SensorTest {
 
 
 }
+*/

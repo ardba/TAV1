@@ -3,7 +3,7 @@ package main;
 /**
  * Created by sanja on 2017-02-15.
  */
-public class ActuatorImpl implements ActuatorInterface{
+public class ActuatorImpl implements Actuator {
     Car myCar;
 
     public ActuatorImpl(Car myCar) {

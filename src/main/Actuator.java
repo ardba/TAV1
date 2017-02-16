@@ -3,7 +3,7 @@ package main;
 /**
  * Created by sanja on 2017-02-15.
  */
-public interface ActuatorInterface {
+public interface Actuator {
     /**
      Description: This method moves the car 1 meter forward. The car cannot be moved forward beyond the end of the street.
      Pre-condition: The car is not at the end of the street.
