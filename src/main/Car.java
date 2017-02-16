@@ -95,4 +95,14 @@ public interface Car {
 	 testWhereIs: Expected output: The car's vehicle data.
 	 */
 	public VehicleData whereIs();
+
+	/**
+	 Description: Sets the car actuators.
+	 Pre-condition: The car is initialized.
+	 Post-condition: Car has an actuator.
+	 Test-cases: NO TEST CASE
+	 */
+	public void setActuator(Actuator actuator);
+
+
 }

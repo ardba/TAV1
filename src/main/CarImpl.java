@@ -8,6 +8,7 @@ public class CarImpl implements Car {
 	private SensorImpl sensorBack;
     public static final int SENSOR_FRONT = 0;
     public static final int SENSOR_BACK = 1;
+    private Actuator actuator;
 
 	public SensorImpl getSensor(int sensor){
 	    switch (sensor){
@@ -68,7 +69,8 @@ public class CarImpl implements Car {
             else {
                 vehicleData.setFreeSpace(vehicleData.getPosition(), false);
             }
-            vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC1.1.
+         //   vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC1.1.
+            vehicleData.setPosition(vehicleData.getPosition() + actuator.moveForward());
 	    }
             return vehicleData;
     }
@@ -167,7 +169,8 @@ public class CarImpl implements Car {
     //The method for moving the car backward
     public VehicleData moveBackward() { // Return type set to VehicleData due to moveBackward() TC3.1.
         if (vehicleData.getPosition() !=0 ){ //// If statement for checking if position is not 0 is created in moveBackward() TC 3.2.
-            vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC3.1.
+            //vehicleData.setPosition(vehicleData.getPosition() -1); //  // Added due to moveBackward() TC3.1.
+            vehicleData.setPosition(vehicleData.getPosition() + actuator.moveBackward());
         }
         return vehicleData;
     }
@@ -217,5 +220,8 @@ public class CarImpl implements Car {
 		vehicleData.setPosition(vehicleData.getPosition()-5);
 		vehicleData.setParked(true);
     }
+    public void setActuator(Actuator actuator){
+        this.actuator = actuator;
+    };
 
 }

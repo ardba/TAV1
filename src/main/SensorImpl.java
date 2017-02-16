@@ -89,7 +89,7 @@ public class SensorImpl {
     }
 
     public void addStaticEmptySpace(){
-        for (int i = 1000; i < i+25; i++){
+        for (int i = 1000; i < 1000+25; i++){
             distance[i] = -1;
         }
     }
