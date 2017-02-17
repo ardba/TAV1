@@ -6,8 +6,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 /**
@@ -16,6 +21,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ScenarioMockitoTest {
    Actuator actuator = mock(Actuator.class);
+   Sensor sensorFront = mock(Sensor.class);
+   Sensor sensorBack = mock(Sensor.class);
     int i;
     @Before
 
@@ -26,15 +33,24 @@ public class ScenarioMockitoTest {
     @Test
     public void testCarMoved1Forward_Mockito(){
         // Start at the beginning of the street
-        CarImpl car = new CarImpl(SensorImpl.STREET_STATIC_PARKING_PLACE);
+        CarImpl car = new CarImpl();
         car.setActuator(actuator);
+        car.setSensors(sensorFront,sensorBack);
 
         //Moves along the street and scan the available parking places.
-        //Move until space found on position 204. (static parking place).
+        //Not finding any space
         when(actuator.moveForward()).thenReturn(1);
-        for(i= 1; i < 205; i++){
+        int[] noSpace = {1,1,1,1,1};
+        when(sensorFront.getDistance(anyInt())).thenReturn(noSpace);
+        for(i= 1; i < 200; i++){
+            if(i < 4){//If rear sensor out of bounds
+                Arrays.fill(noSpace,-1); //Fill result with "out of bounds error"
+            }
+            when(sensorBack.getDistance(anyInt())).thenReturn(noSpace);
             car.moveForward();
+            Arrays.fill(noSpace,1); //reset to default "in bounds" value
         }
+
 
         //Moves the car backwards and parks.
         when(actuator.moveBackward()).thenReturn(-1);

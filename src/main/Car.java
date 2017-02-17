@@ -103,6 +103,6 @@ public interface Car {
 	 Test-cases: NO TEST CASE
 	 */
 	public void setActuator(Actuator actuator);
-
+	public void setSensors (Sensor sensorFront, Sensor sensorBack);
 
 }

@@ -4,13 +4,13 @@ package main;
 public class CarImpl implements Car {
 
     private VehicleData vehicleData; // Return type set to VehicleData due to moveForward() TC2.
-	private SensorImpl sensorFront;
-	private SensorImpl sensorBack;
+	private Sensor sensorFront;
+	private Sensor sensorBack;
     public static final int SENSOR_FRONT = 0;
     public static final int SENSOR_BACK = 1;
     private Actuator actuator;
 
-	public SensorImpl getSensor(int sensor){
+	public Sensor getSensor(int sensor){
 	    switch (sensor){
             case SENSOR_FRONT:
                 return sensorFront;
@@ -21,40 +21,9 @@ public class CarImpl implements Car {
         }
     }
 
-    public CarImpl(int streetVariation){
-        vehicleData = new VehicleData();
-        switch (streetVariation) {
-            case SensorImpl.STREET_DEFAULT:
-                sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
-                sensorBack = new SensorImpl(sensorFront);
-                break;
-            case SensorImpl.STREET_EMPTY:
-                sensorFront = new SensorImpl(SensorImpl.STREET_EMPTY);
-                sensorBack = new SensorImpl(sensorFront);
-                break;
-            case SensorImpl.STREET_FULL:
-                sensorFront = new SensorImpl(SensorImpl.STREET_FULL);
-                sensorBack = new SensorImpl(sensorFront);
-                break;
-            case SensorImpl.BROKEN_SENSOR:
-                if(Math.random() > 0.5){
-                    sensorFront = new SensorImpl(SensorImpl.BROKEN_SENSOR);
-                    sensorBack = new SensorImpl(SensorImpl.STREET_DEFAULT);
-                }else{
-                    sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
-                    sensorBack = new SensorImpl(SensorImpl.BROKEN_SENSOR);
-                }
-                break;
-            case SensorImpl.STREET_STATIC_PARKING_PLACE:
-                sensorFront = new SensorImpl(SensorImpl.STREET_STATIC_PARKING_PLACE);
-                sensorBack = new SensorImpl(sensorFront);
-                break;
-            default:
-                sensorFront = new SensorImpl(SensorImpl.STREET_DEFAULT);
-                sensorBack = new SensorImpl(sensorFront);
-                break;
-        }
+    public CarImpl() {
 
+	    this.vehicleData = new VehicleData();
     }
 
 
@@ -224,4 +193,8 @@ public class CarImpl implements Car {
         this.actuator = actuator;
     };
 
+    public void setSensors(Sensor sensorFront, Sensor sensorBack){
+        this.sensorFront = sensorFront;
+        this.sensorBack = sensorBack;
+    };
 }
