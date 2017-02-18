@@ -31,7 +31,7 @@ public class ScenarioMockitoTest {
     }
     // Scenario 1.
     @Test
-    public void testCarMoved1Forward_Mockito(){
+    public void testScenario1_Mockito(){
         // Start at the beginning of the street
         CarImpl car = new CarImpl();
         car.setActuator(actuator);
@@ -60,6 +60,8 @@ public class ScenarioMockitoTest {
         car.unPark();
         for(i= 30; i < 500 ; i++){
             car.moveForward();
+
+            //check sensors reading every time
         }
 
 
