@@ -10,16 +10,6 @@ public class CarImpl implements Car {
     public static final int SENSOR_BACK = 1;
     private Actuator actuator;
 
-	public Sensor getSensor(int sensor){
-	    switch (sensor){
-            case SENSOR_FRONT:
-                return sensorFront;
-            case SENSOR_BACK:
-                return sensorBack;
-            default:
-                return null;
-        }
-    }
 
     public CarImpl() {
 
