@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class ScenarioMockitoTest {
+public class Scenario1 {
     Actuator actuator = mock(Actuator.class);
     Sensor sensorFront = mock(Sensor.class);
     Sensor sensorBack = mock(Sensor.class);

@@ -19,7 +19,6 @@ public class Scenario2 {
 
     CarImpl car;
 
-    //@Mock
     Actuator actuator;
     Sensor sensorFront;
     Sensor sensorBack;
@@ -93,7 +92,7 @@ public class Scenario2 {
     }
 
     @Test
-    public void test(){
+    public void test1(){
         car.whereIs().setPosition(0); //Car starts at the beginning of the street
         car.park(); //Moves along the street and scans the available parking spaces
         Assert.assertEquals(true,car.whereIs().isParked());
@@ -112,7 +111,20 @@ public class Scenario2 {
         while(car.whereIs().getPosition() != 436)
             car.moveForward();
 
-        Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
+       // Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
+
+    }
+
+    @Test
+    public void test2(){
+
+        Assert.assertEquals(false, car.whereIs().isParked());
+
+        car.whereIs().setPosition(490);
+        car.whereIs().setStaticParkingSpace();
+        car.park();
+
+        Assert.assertEquals(true, car.whereIs().isParked());
 
     }
 }
