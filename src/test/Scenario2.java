@@ -94,9 +94,25 @@ public class Scenario2 {
 
     @Test
     public void test(){
-        car.park();
-        Assert.assertEquals(241,car.whereIs().getPosition());
-        Assert.assertEquals(true,car.whereIs().isParkingSpaceFound());
+        car.whereIs().setPosition(0); //Car starts at the beginning of the street
+        car.park(); //Moves along the street and scans the available parking spaces
+        Assert.assertEquals(true,car.whereIs().isParked());
+
+
+        car.unPark();
+        Assert.assertEquals(false,car.whereIs().isParked());
+
+        for(int i = 0; i < 5; i++){
+            car.moveBackward();
+        }
+
+        Assert.assertEquals(232, car.whereIs().getPosition());
+
+
+        while(car.whereIs().getPosition() != 436)
+            car.moveForward();
+
+        Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
 
     }
 }

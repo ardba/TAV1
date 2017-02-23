@@ -176,6 +176,7 @@ public class CarImpl implements Car {
 
 
     public void parallelPark(){
+
 		vehicleData.setPosition(vehicleData.getPosition()-5);
 		vehicleData.setParked(true);
     }
