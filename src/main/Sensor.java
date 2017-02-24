@@ -20,12 +20,4 @@ public interface Sensor {
      */
     public int[] getDistance (int position);
 
-    /**
-     Description: This method disables a sensor if the sensor returns unreliable readings regularly.
-     Pre-condition: A sensor is active.
-     Post-condition: The sensor readings are ignored
-     */
-    public void disable();
-
-    public boolean isActive();
 }

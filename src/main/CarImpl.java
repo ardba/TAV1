@@ -44,13 +44,16 @@ public class CarImpl implements Car {
             return -1;
         }
 
+        boolean sensorFrontEnabled = true;
+        boolean sensorBackEnabled = true;
+
 
         int sensorFrontPos = vehicleData.getPosition();
         int sensorBackPos = sensorFrontPos - 5;
         int sensorFrontMeasurement = 201, sensorBackMeasurement = 201;
 
 
-        if (sensorFront.isActive()) {               //If the front sensor has been working properly
+        if (sensorFrontEnabled) {               //If the front sensor has been working properly
             if (sensorFrontPos < 500 && sensorFrontPos >= 0) {
                 //Loop the 5 measurements and get rid of the noise by choosing the value
                 //that shows up the most times.
@@ -63,7 +66,7 @@ public class CarImpl implements Car {
                     tempCounter = 0;
 
                     //Broken sensor test case: If the sensor gives unreasonable data, disable it.
-                    if(temp > 201) sensorFront.disable();
+                    if(temp > 201) sensorFrontEnabled = false;
 
                     for (int j = 1; j < sensorFrontDistance.length; j++) {
                         if (temp == sensorFrontDistance[j])
@@ -79,7 +82,7 @@ public class CarImpl implements Car {
         }
 
 
-        if (sensorBack.isActive()) {
+        if (sensorBackEnabled) {
             //If sensor 2 is in the range of the street, between 0 & 500
             if (sensorBackPos >= 0 && sensorBackPos < 500) {
                 int[] sensorBackDistance = sensorBack.getDistance(sensorBackPos);
@@ -94,7 +97,7 @@ public class CarImpl implements Car {
                     temp = sensorBackDistance[i];
                     tempCounter = 0;
 
-                    if(temp > 201) sensorBack.disable(); //If the sensor gives unreasonable data, disable it.
+                    if(temp > 201) sensorBackEnabled = false; //If the sensor gives unreasonable data, disable it.
 
                     for (int j = 1; j < sensorBackDistance.length; j++) {
                         if (temp == sensorBackDistance[j])
@@ -109,10 +112,10 @@ public class CarImpl implements Car {
             }
         }
 
-        if(!sensorFront.isActive())         //If front sensor is broken
+        if(!sensorFrontEnabled)         //If front sensor is broken
             return sensorBackMeasurement;      //Return measurements of back sensor
 
-        if(!sensorBack.isActive())          //If back sensor is broken
+        if(!sensorBackEnabled)          //If back sensor is broken
             return sensorFrontMeasurement;      //Return measurements of front sensor
 
 

@@ -84,25 +84,19 @@ public class Scenarios {
 
         }
 
-        when(sensorFront.isActive()).thenReturn(true);
-        when(sensorBack.isActive()).thenReturn(true);
     }
 
     @Test
     public void scenario1(){
         car.whereIs().setPosition(0); //Car starts at the beginning of the street
-        car.park(); //Moves along the street and scans the available parking spaces
+        car.park();                   //Check the report or the park method for this one
         Assert.assertEquals(true,car.whereIs().isParked());
 
 
         car.unPark();
         Assert.assertEquals(false,car.whereIs().isParked());
 
-        for(int i = 0; i < 5; i++){
-            car.moveBackward();
-        }
-
-        Assert.assertEquals(232, car.whereIs().getPosition());
+        Assert.assertEquals(232, car.whereIs().getPosition()); //Expect the car to be parked
 
 
         while(car.whereIs().getPosition() != 436)
