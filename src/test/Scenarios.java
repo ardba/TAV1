@@ -39,11 +39,11 @@ public class Scenarios {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
 
-                if (car.whereIs().getPosition() > 500){
-                    return 0;
+                if (car.whereIs().getPosition() < 500){
+                    return 1;
                 }
                 else {
-                    return 1;
+                    return 0;
                 }
             }
         });
@@ -132,7 +132,7 @@ public class Scenarios {
         for(int i = 0; i< 200; i++)
             car.moveForward();          //Try to keep moving the car after it is at the end of the street
 
-       Assert.assertEquals(true,(car.whereIs().getPosition() == 499)); //The car shouldn't have moved
+       Assert.assertEquals(499,car.whereIs().getPosition()); //The car shouldn't have moved
 
     }
 
