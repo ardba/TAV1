@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import java.io.*;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -59,30 +61,55 @@ public class Scenarios {
             }
         });
 
-        int[] freeSpace = {-1,-1,-1,-1,-1};
-        int[] takenSpace = {20,364,20,124,20};
-        int[] brokenSpace = {6075,300,412,259,475};
-        for(int i = 0; i < 500; i++){
 
-            if(i > 30 && i < 35){
-                when(sensorFront.getDistance(i)).thenReturn(freeSpace);
-                when(sensorBack.getDistance(i)).thenReturn(freeSpace);
-            }else if(i >= 232 && i <= 242){
-                when(sensorFront.getDistance(i)).thenReturn(freeSpace);
-                when(sensorBack.getDistance(i)).thenReturn(freeSpace);
-            }else if(i > 430 && i < 436 ){
-                when(sensorFront.getDistance(i)).thenReturn(freeSpace);
-            }else{
-                when(sensorFront.getDistance(i)).thenReturn(takenSpace);
-                if(i > 250) {
-                    when(sensorBack.getDistance(i)).thenReturn(brokenSpace);
-                }else{
-                    when(sensorBack.getDistance(i)).thenReturn(takenSpace);
-                }
+        try{
+            FileReader reader = new FileReader(new File("street.txt"));
+            BufferedReader bReader = new BufferedReader(reader);
+            String street = bReader.readLine();
+            String[] measurements = street.split(" ");
+            for(int i = 0; i<measurements.length; i+=5){
+                int[] reading ={
+                        Integer.parseInt(measurements[i]),
+                        Integer.parseInt(measurements[i+1]),
+                        Integer.parseInt(measurements[i+2]),
+                        Integer.parseInt(measurements[i+3]),
+                        Integer.parseInt(measurements[i+4])};
+                when(sensorFront.getDistance(i/5)).thenReturn(reading);
+                when(sensorBack.getDistance(i/5)).thenReturn(reading);
             }
+        }catch (FileNotFoundException e){
+            System.out.println("File street.txt not found, creating one " + e);
+            try {
+                PrintWriter out = new PrintWriter("street.txt");
+                String freeSpace = "-1 -1 -1 -1 -1 ";
+                String takenSpace = "20 364 20 124 20 ";
+                for(int i = 0; i < 500; i++){
 
-
+                    //Put too small parking place (4 size)
+                    if(i > 30 && i < 35){
+                        out.print(freeSpace);
+                    }else if(i >= 232 && i <= 242){
+                        out.print(freeSpace);
+                    }else if(i > 430 && i < 436 ){
+                        out.print(freeSpace);
+                    }else{
+                        out.print(takenSpace);
+                    }
+                }
+                out.close();
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        }catch (IOException e){
+            System.out.println("IO exception " + e);
         }
+
+        //We need to break one sensor!
+        int[] brokenSpace = {6075,300,412,259,475};
+        for(int i = 250; i<500;i++){
+            when(sensorBack.getDistance(i)).thenReturn(brokenSpace);
+        }
+
 
     }
 
@@ -96,7 +123,7 @@ public class Scenarios {
         car.unPark();
         Assert.assertEquals(false,car.whereIs().isParked());
 
-        Assert.assertEquals(232, car.whereIs().getPosition()); //Expect the car to be parked
+        Assert.assertEquals(237, car.whereIs().getPosition()); //Expect the car to be parked
 
 
         while(car.whereIs().getPosition() != 436)
