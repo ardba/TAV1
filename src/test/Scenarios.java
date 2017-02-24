@@ -127,7 +127,12 @@ public class Scenarios {
         while(car.whereIs().getPosition() != 499)
             car.moveForward();
 
-       Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
+        Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
+
+        for(int i = 0; i< 200; i++)
+            car.moveForward();          //Try to keep moving the car after it is at the end of the street
+
+       Assert.assertEquals(true,(car.whereIs().getPosition() == 499)); //The car shouldn't have moved
 
     }
 
