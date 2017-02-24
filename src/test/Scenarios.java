@@ -23,15 +23,15 @@ public class Scenarios {
     Sensor sensorBack;
 
     @Before
-    public void create(){
-     //   initMocks(this);
+    public void create() {
+        //   initMocks(this);
 
         actuator = mock(Actuator.class);
         sensorFront = mock(Sensor.class);
         sensorBack = mock(Sensor.class);
 
         car = new CarImpl();
-        car.setSensors(sensorFront,sensorBack);
+        car.setSensors(sensorFront, sensorBack);
         car.setActuator(actuator);
 
         when(actuator.moveForward()).thenAnswer(new Answer() {
@@ -39,10 +39,9 @@ public class Scenarios {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
 
-                if (car.whereIs().getPosition() < 499){
+                if (car.whereIs().getPosition() < 499) {
                     return 1;
-                }
-                else {
+                } else {
                     return 0;
                 }
             }
@@ -52,58 +51,59 @@ public class Scenarios {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
 
-                if (car.whereIs().getPosition() < 1){
+                if (car.whereIs().getPosition() < 1) {
                     return 0;
-                }
-                else {
+                } else {
                     return -1;
                 }
             }
         });
-
-
-        try{
-            FileReader reader = new FileReader(new File("street.txt"));
-            BufferedReader bReader = new BufferedReader(reader);
-            String street = bReader.readLine();
-            String[] measurements = street.split(" ");
-            for(int i = 0; i<measurements.length; i+=5){
-                int[] reading ={
-                        Integer.parseInt(measurements[i]),
-                        Integer.parseInt(measurements[i+1]),
-                        Integer.parseInt(measurements[i+2]),
-                        Integer.parseInt(measurements[i+3]),
-                        Integer.parseInt(measurements[i+4])};
-                when(sensorFront.getDistance(i/5)).thenReturn(reading);
-                when(sensorBack.getDistance(i/5)).thenReturn(reading);
-            }
-        }catch (FileNotFoundException e){
-            System.out.println("File street.txt not found, creating one " + e);
+        int tries = 0;
+        while(tries < 2){
             try {
-                PrintWriter out = new PrintWriter("street.txt");
-                String freeSpace = "-1 -1 -1 -1 -1 ";
-                String takenSpace = "20 364 20 124 20 ";
-                for(int i = 0; i < 500; i++){
-
-                    //Put too small parking place (4 size)
-                    if(i > 30 && i < 35){
-                        out.print(freeSpace);
-                    }else if(i >= 232 && i <= 242){
-                        out.print(freeSpace);
-                    }else if(i > 430 && i < 436 ){
-                        out.print(freeSpace);
-                    }else{
-                        out.print(takenSpace);
-                    }
+                FileReader reader = new FileReader(new File("street.txt"));
+                BufferedReader bReader = new BufferedReader(reader);
+                String street = bReader.readLine();
+                String[] measurements = street.split(" ");
+                tries++;
+                for (int i = 0; i < measurements.length; i += 5) {
+                    int[] reading = {
+                            Integer.parseInt(measurements[i]),
+                            Integer.parseInt(measurements[i + 1]),
+                            Integer.parseInt(measurements[i + 2]),
+                            Integer.parseInt(measurements[i + 3]),
+                            Integer.parseInt(measurements[i + 4])};
+                    when(sensorFront.getDistance(i / 5)).thenReturn(reading);
+                    when(sensorBack.getDistance(i / 5)).thenReturn(reading);
                 }
-                out.close();
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            }
-        }catch (IOException e){
-            System.out.println("IO exception " + e);
-        }
+            } catch (FileNotFoundException e) {
+                System.out.println("File street.txt not found, creating one " + e);
+                try {
+                    PrintWriter out = new PrintWriter("street.txt");
+                    String freeSpace = "-1 -1 -1 -1 -1 ";
+                    String takenSpace = "20 364 20 124 20 ";
+                    for (int i = 0; i < 500; i++) {
 
+                        //Put too small parking place (4 size)
+                        if (i > 30 && i < 35) {
+                            out.print(freeSpace);
+                        } else if (i >= 232 && i <= 242) {
+                            out.print(freeSpace);
+                        } else if (i > 430 && i < 436) {
+                            out.print(freeSpace);
+                        } else {
+                            out.print(takenSpace);
+                        }
+                    }
+                    out.close();
+
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (IOException e) {
+                System.out.println("IO exception " + e);
+            }
+        }
         //We need to break one sensor!
         int[] brokenSpace = {6075,300,412,259,475};
         for(int i = 250; i<500;i++){
