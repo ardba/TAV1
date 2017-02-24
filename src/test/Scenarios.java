@@ -119,17 +119,15 @@ public class Scenarios {
         car.park();                   //Check the report or the park method for this one
         Assert.assertEquals(true,car.whereIs().isParked());
 
-
         car.unPark();
         Assert.assertEquals(false,car.whereIs().isParked());
 
         Assert.assertEquals(237, car.whereIs().getPosition()); //Expect the car to be parked
 
-
-        while(car.whereIs().getPosition() != 436)
+        while(car.whereIs().getPosition() != 499)
             car.moveForward();
 
-       // Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
+       Assert.assertEquals(true,(car.whereIs().getPosition() == 499));
 
     }
 
