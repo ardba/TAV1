@@ -6,16 +6,13 @@ import main.Sensor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
 
-public class Scenario2 {
+public class Scenarios {
 
     CarImpl car;
 
@@ -92,7 +89,7 @@ public class Scenario2 {
     }
 
     @Test
-    public void test1(){
+    public void scenario1(){
         car.whereIs().setPosition(0); //Car starts at the beginning of the street
         car.park(); //Moves along the street and scans the available parking spaces
         Assert.assertEquals(true,car.whereIs().isParked());
@@ -116,7 +113,7 @@ public class Scenario2 {
     }
 
     @Test
-    public void test2(){
+    public void scenario2(){
 
         Assert.assertEquals(false, car.whereIs().isParked());
 
