@@ -20,7 +20,9 @@ public class CarImpl implements Car {
 	@Override
     //The method for moving the car forward
     public VehicleData moveForward() { // Return type set to VehicleData due to moveForward() TC1.1.
-        if(vehicleData.getPosition() != 500){ // If statement for checking if position is not 499 is created in moveForward() TC 1.2.
+
+        //Commented out because the actuator already checks if the car is at the end of the street
+        //if(vehicleData.getPosition() < 499){ // If statement for checking if position is not 499 is created in moveForward() TC 1.2.
 
             if (isEmpty() == -1){
                 vehicleData.setFreeSpace(vehicleData.getPosition(), true);
@@ -30,7 +32,9 @@ public class CarImpl implements Car {
             }
          //   vehicleData.setPosition(vehicleData.getPosition() +1); // Added due to moveForward() TC1.1.
             vehicleData.setPosition(vehicleData.getPosition() + actuator.moveForward());
-	    }
+
+	    //}
+
             return vehicleData;
     }
 

@@ -39,7 +39,7 @@ public class Scenarios {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
 
-                if (car.whereIs().getPosition() < 500){
+                if (car.whereIs().getPosition() < 499){
                     return 1;
                 }
                 else {
